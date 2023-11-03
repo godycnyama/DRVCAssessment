@@ -7,7 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Abstractions\" />
+    <Folder Include="Abstractions\Services\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Roulette.Domain\Roulette.Domain.csproj" />
   </ItemGroup>
 
 </Project>
