@@ -1,17 +1,31 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
+    <Nullable>false</Nullable>
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Abstractions\Services\" />
+    <PackageReference Include="AutoMapper" Version="12.0.1" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
+    <PackageReference Include="FluentValidation" Version="11.8.0" />
+    <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.8.0" />
+    <PackageReference Include="MediatR" Version="12.1.1" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Roulette.Domain\Roulette.Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Features\BetFeatures\GetAllBets\" />
+    <Folder Include="Features\DepositFeatures\GetDeposit\" />
+    <Folder Include="Features\DepositFeatures\GetDeposits\" />
+    <Folder Include="Features\PayoutFeatures\GetPayout\" />
+    <Folder Include="Features\PayoutFeatures\GetPayouts\" />
+    <Folder Include="Features\SpinFeatures\GetSpin\" />
+    <Folder Include="Features\SpinFeatures\GetSpins\" />
   </ItemGroup>
 
 </Project>

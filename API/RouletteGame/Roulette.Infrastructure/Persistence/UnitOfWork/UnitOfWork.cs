@@ -11,35 +11,31 @@ using System.Threading.Tasks;
 namespace Roulette.Infrastructure.Persistence.UnitOfWork;
 public class UnitOfWork : IUnitOfWork
 {
-    private readonly RouletteDataContext _dbContext;
-    private IBetRepository _betRepository;
-    private IDepositRepository _depositRepository;
-    private ISpinRepository _spinRepository;
-    private IPayoutRepository _payoutRepository;
+    private readonly RouletteDataContext dbContext;
+    public IBetRepository BetRepository { get; }
+    public IDepositRepository DepositRepository { get; }
+    public ISpinRepository SpinRepository { get; }
+    public IPayoutRepository PayoutRepository { get; }
 
-    public UnitOfWork(RouletteDataContext dbContext)
+    public UnitOfWork(RouletteDataContext _dbContext, IBetRepository _betRepository, IDepositRepository _depositRepository, ISpinRepository _spinRepository, IPayoutRepository _payoutRepository)
     {
-        _dbContext = dbContext;
+        this.dbContext = _dbContext;
+        this.BetRepository = _betRepository;
+        this.DepositRepository = _depositRepository;
+        this.SpinRepository = _spinRepository;
+        this.PayoutRepository = _payoutRepository;
+
     }
 
-    public IBetRepository BetRepository => _betRepository ??= new BetRepository(_dbContext);
-
-    public IDepositRepository DepositRepository => _depositRepository ??= new DepositRepository(_dbContext);
-
-    public ISpinRepository SpinRepository => _spinRepository ??= new SpinRepository(_dbContext);
-
-    public IPayoutRepository PayoutRepository => _payoutRepository ??= new PayoutRepository(_dbContext);
-
-
     public void Commit()
-        => _dbContext.SaveChanges();
+        => dbContext.SaveChanges();
 
     public async Task CommitAsync()
-        => await _dbContext.SaveChangesAsync();
+        => await dbContext.SaveChangesAsync();
 
     public void Rollback()
-        => _dbContext.Dispose();
+        => dbContext.Dispose();
 
     public async Task RollbackAsync()
-        => await _dbContext.DisposeAsync();
+        => await dbContext.DisposeAsync();
 }
