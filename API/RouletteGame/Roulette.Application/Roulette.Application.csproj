@@ -19,13 +19,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Features\BetFeatures\GetAllBets\" />
     <Folder Include="Features\DepositFeatures\GetDeposit\" />
     <Folder Include="Features\DepositFeatures\GetDeposits\" />
     <Folder Include="Features\PayoutFeatures\GetPayout\" />
     <Folder Include="Features\PayoutFeatures\GetPayouts\" />
-    <Folder Include="Features\SpinFeatures\GetSpin\" />
-    <Folder Include="Features\SpinFeatures\GetSpins\" />
   </ItemGroup>
 
 </Project>

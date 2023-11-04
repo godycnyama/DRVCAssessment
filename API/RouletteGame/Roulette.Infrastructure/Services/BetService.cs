@@ -1,18 +1,9 @@
-﻿using AutoMapper;
-using Roulette.Application.Abstractions.Services;
+﻿using Roulette.Application.Abstractions.Services;
 using Roulette.Application.Abstractions.UnitOfWork;
-using Roulette.Application.Common.Models;
 using Roulette.Application.Features.BetFeatures.CreateBet;
 using Roulette.Application.Features.BetFeatures.DeleteBet;
 using Roulette.Application.Features.BetFeatures.UpdateBet;
 using Roulette.Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Numerics;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace Roulette.Infrastructure.Services;
 public class BetService : IBetService

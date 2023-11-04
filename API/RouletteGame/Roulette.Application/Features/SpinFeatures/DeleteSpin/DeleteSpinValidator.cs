@@ -5,10 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Roulette.Application.Features.BetFeatures.DeleteBet;
-public sealed class DeleteBetValidator : AbstractValidator<DeleteBetRequest>
+namespace Roulette.Application.Features.SpinFeatures.DeleteSpin;
+public sealed class DeleteSpinValidator : AbstractValidator<DeleteSpinRequest>
 {
-    public DeleteBetValidator()
+    public DeleteSpinValidator()
     {
         RuleFor(x => x.Id).NotEmpty();
     }

@@ -6,17 +6,17 @@ using Roulette.Domain.Entities;
 namespace Roulette.Application.Features.BetFeatures.DeleteBet;
 public sealed class DeleteBetHandler : IRequestHandler<DeleteBetRequest, DeleteBetResponse>
 {
-    private readonly IBetService _betService;
-    private readonly IMapper _mapper;
+    private readonly IBetService betService;
+    private readonly IMapper mapper;
 
-    public DeleteBetHandler(IMapper mapper, IBetService betService)
+    public DeleteBetHandler(IMapper _mapper, IBetService _betService)
     {
-        _betService = betService;
-        _mapper = mapper;
+        betService = _betService;
+        mapper = _mapper;
     }
 
     public async Task<DeleteBetResponse> Handle(DeleteBetRequest request, CancellationToken cancellationToken)
     {
-        return await _betService.DeleteBet(request.Id);
+        return await betService.DeleteBet(request.Id);
     }
 }
