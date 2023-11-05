@@ -1,5 +1,5 @@
 ﻿namespace Roulette.Application.Features.AccountFeatures.Commands.DepositAccount;
-public class DepositAccountResponse
+public sealed record DepositAccountResponse
 {
     public int Id { get; set; }
     public string FirstName { get; set; }

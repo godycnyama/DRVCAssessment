@@ -18,6 +18,8 @@ public sealed class UpdateAccountHandler : IRequestHandler<UpdateAccountRequest,
     public async Task<UpdateAccountResponse> Handle(UpdateAccountRequest request, CancellationToken cancellationToken)
     {
         Account account = _mapper.Map<Account>(request);
-        return await _accountService.UpdateAccount(account);
+        var response = await _accountService.UpdateAccount(account);
+        return _mapper.Map<UpdateAccountResponse>(response);
+
     }
 }

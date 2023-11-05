@@ -1,5 +1,12 @@
 ﻿
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Roulette.Application.Abstractions.Services;
+using Roulette.Application.Features.PayoutFeatures.Commands.CreatePayout;
+using Roulette.Application.Features.PayoutFeatures.Commands.DeletePayout;
+using Roulette.Application.Features.PayoutFeatures.Commands.UpdatePayout;
+using Roulette.Application.Features.PayoutFeatures.Queries.GetPayout;
+using Roulette.Application.Features.PayoutFeatures.Queries.GetPayouts;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -8,35 +15,101 @@ namespace Roulette.API.PayoutsAPI;
 [ApiController]
 public class PayoutsController : ControllerBase
 {
-    // GET: api/<PayoutsController>
+    private readonly IPayoutService _payoutsService;
+    private readonly IMediator _mediator;
+
+    public PayoutsController(IPayoutService payoutsService, IMediator mediator)
+    {
+        _payoutsService = payoutsService;
+        _mediator = mediator;
+    }
+
+    //get all payouts
     [HttpGet]
-    public IEnumerable<string> Get()
+    [Route("roulette/api/v1/payouts")]
+    public async Task<IActionResult> GetAllPayouts()
     {
-        return new string[] { "value1", "value2" };
+        try
+        {
+            var payouts = await _mediator.Send(new GetPayoutsRequest());
+
+            if (payouts == null)
+            {
+                return NotFound("No payout records found");
+            }
+            return Ok(payouts);
+        }
+        catch (Exception ex)
+        {
+            return BadRequest(ex.Message);
+        }
     }
 
-    // GET api/<PayoutsController>/5
-    [HttpGet("{id}")]
-    public string Get(int id)
+    //get payout by id
+    [HttpGet]
+    [Route("roulette/api/v1/payouts/{id}")]
+    public async Task<IActionResult> GetPayout(int id)
     {
-        return "value";
+        try
+        {
+            var payout = await _mediator.Send(new GetPayoutRequest(id));
+            if (payout == null)
+            {
+                return NotFound("Payout not found");
+            }
+            return Ok(payout);
+        }
+        catch (Exception ex)
+        {
+            return BadRequest(ex.Message);
+        }
     }
 
-    // POST api/<PayoutsController>
+    //update payout
+    [HttpPut]
+    [Route("roulette/api/v1/payouts")]
+    public async Task<IActionResult> UpdatePayout([FromBody] UpdatePayoutRequest updatePayoutRequest)
+    {
+        try
+        {
+            var response = await _mediator.Send(updatePayoutRequest);
+            return Ok(response);
+        }
+        catch (Exception ex)
+        {
+            return BadRequest(ex.Message);
+        }
+    }
+
+    //create new payout
     [HttpPost]
-    public void Post([FromBody] string value)
+    [Route("roulette/api/v1/payouts")]
+    public async Task<IActionResult> CreatePayout([FromBody] CreatePayoutRequest createPayoutRequest)
     {
+        try
+        {
+            var response = await _mediator.Send(createPayoutRequest);
+            return Ok(response);
+        }
+        catch (Exception ex)
+        {
+            return BadRequest(ex.Message);
+        }
     }
 
-    // PUT api/<PayoutsController>/5
-    [HttpPut("{id}")]
-    public void Put(int id, [FromBody] string value)
+    //delete payout given payout id
+    [HttpDelete]
+    [Route("roulette/api/payouts/{id}")]
+    public async Task<IActionResult> DeletePayout(int id)
     {
-    }
-
-    // DELETE api/<PayoutsController>/5
-    [HttpDelete("{id}")]
-    public void Delete(int id)
-    {
+        try
+        {
+            var response = await _mediator.Send(new DeletePayoutRequest(id));
+            return Ok(response);
+        }
+        catch (Exception ex)
+        {
+            return BadRequest(ex.Message);
+        }
     }
 }

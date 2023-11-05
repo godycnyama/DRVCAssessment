@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Roulette.Application.Features.BetFeatures.UpdateBet;
+namespace Roulette.Application.Features.BetFeatures.Commands.UpdateBet;
 public class UpdateBetResponse: MessageResponse
 {
 }

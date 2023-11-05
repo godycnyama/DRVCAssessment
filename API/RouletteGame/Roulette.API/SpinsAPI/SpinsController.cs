@@ -1,4 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using MediatR;
+using Microsoft.AspNetCore.Mvc;
+using Roulette.Application.Abstractions.Services;
+using Roulette.Application.Features.SpinFeatures.Commands.DeleteSpin;
+using Roulette.Application.Features.SpinFeatures.Queries.GetSpin;
+using Roulette.Application.Features.SpinFeatures.Queries.GetSpins;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -7,35 +12,69 @@ namespace Roulette.API.SpinsAPI;
 [ApiController]
 public class SpinsController : ControllerBase
 {
-    // GET: api/<SpinsController>
+    private readonly ISpinService _spinsService;
+    private readonly IMediator _mediator;
+
+    public SpinsController(ISpinService spinsService, IMediator mediator)
+    {
+        _spinsService = spinsService;
+        _mediator = mediator;
+    }
+
+    //get all spins
     [HttpGet]
-    public IEnumerable<string> Get()
+    [Route("roulette/api/v1/spins")]
+    public async Task<IActionResult> GetAllSpins()
     {
-        return new string[] { "value1", "value2" };
+        try
+        {
+            var spins = await _mediator.Send(new GetSpinsRequest());
+
+            if (spins == null)
+            {
+                return NotFound("No spin records found");
+            }
+            return Ok(spins);
+        }
+        catch (Exception ex)
+        {
+            return BadRequest(ex.Message);
+        }
     }
 
-    // GET api/<SpinsController>/5
-    [HttpGet("{id}")]
-    public string Get(int id)
+    //get spin by id
+    [HttpGet]
+    [Route("roulette/api/v1/spins/{id}")]
+    public async Task<IActionResult> GetSpin(int id)
     {
-        return "value";
+        try
+        {
+            var spin = await _mediator.Send(new GetSpinRequest(id));
+            if (spin == null)
+            {
+                return NotFound("Spin not found");
+            }
+            return Ok(spin);
+        }
+        catch (Exception ex)
+        {
+            return BadRequest(ex.Message);
+        }
     }
 
-    // POST api/<SpinsController>
-    [HttpPost]
-    public void Post([FromBody] string value)
+    //delete spin given spin id
+    [HttpDelete]
+    [Route("roulette/api/spins/{id}")]
+    public async Task<IActionResult> DeleteSpin(int id)
     {
-    }
-
-    // PUT api/<SpinsController>/5
-    [HttpPut("{id}")]
-    public void Put(int id, [FromBody] string value)
-    {
-    }
-
-    // DELETE api/<SpinsController>/5
-    [HttpDelete("{id}")]
-    public void Delete(int id)
-    {
+        try
+        {
+            var response = await _mediator.Send(new DeleteSpinRequest(id));
+            return Ok(response);
+        }
+        catch (Exception ex)
+        {
+            return BadRequest(ex.Message);
+        }
     }
 }

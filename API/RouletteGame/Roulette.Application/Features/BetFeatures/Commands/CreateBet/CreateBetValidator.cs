@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 
-namespace Roulette.Application.Features.BetFeatures.CreateBet;
+namespace Roulette.Application.Features.BetFeatures.Commands.CreateBet;
 public sealed class CreateBetValidator : AbstractValidator<CreateBetRequest>
 {
     public CreateBetValidator()

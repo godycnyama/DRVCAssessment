@@ -6,18 +6,18 @@ using Roulette.Domain.Entities;
 namespace Roulette.Application.Features.SpinFeatures.Queries.GetSpin;
 public sealed class GetSpinHandler : IRequestHandler<GetSpinRequest, GetSpinResponse>
 {
-    private readonly ISpinService payoutService;
+    private readonly ISpinService spinService;
     private readonly IMapper mapper;
 
-    public GetSpinHandler(IMapper _mapper, ISpinService _payoutService)
+    public GetSpinHandler(IMapper _mapper, ISpinService _spinService)
     {
-        payoutService = _payoutService;
+        spinService = _spinService;
         mapper = _mapper;
     }
 
     public async Task<GetSpinResponse> Handle(GetSpinRequest request, CancellationToken cancellationToken)
     {
-        Spin payout =  await payoutService.GetSpin(request.Id, cancellationToken);
-        return mapper.Map<GetSpinResponse>(payout);
+        Spin spin =  await spinService.GetSpin(request.Id, cancellationToken);
+        return mapper.Map<GetSpinResponse>(spin);
     }
 }

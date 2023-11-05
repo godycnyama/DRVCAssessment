@@ -1,5 +1,5 @@
-﻿namespace Roulette.Application.Features.AccountFeatures.Commands.UpdateAccount;
-public sealed record UpdateAccountResponse
+﻿namespace Roulette.Application.Features.AccountFeatures.Queries.GetAccounts;
+public sealed record GetAccountsResponse
 {
     public int Id { get; set; }
     public string FirstName { get; set; }

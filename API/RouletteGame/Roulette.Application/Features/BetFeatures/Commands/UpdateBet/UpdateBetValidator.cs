@@ -1,11 +1,6 @@
 ﻿using FluentValidation;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Roulette.Application.Features.BetFeatures.UpdateBet;
+namespace Roulette.Application.Features.BetFeatures.Commands.UpdateBet;
 public sealed class UpdateBetValidator : AbstractValidator<UpdateBetRequest>
 {
     public UpdateBetValidator()

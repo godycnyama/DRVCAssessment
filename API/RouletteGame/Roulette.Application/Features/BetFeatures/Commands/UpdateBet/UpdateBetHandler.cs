@@ -3,7 +3,7 @@ using MediatR;
 using Roulette.Application.Abstractions.Services;
 using Roulette.Domain.Entities;
 
-namespace Roulette.Application.Features.BetFeatures.UpdateBet;
+namespace Roulette.Application.Features.BetFeatures.Commands.UpdateBet;
 public sealed class UpdateBetHandler : IRequestHandler<UpdateBetRequest, UpdateBetResponse>
 {
     private readonly IBetService betService;

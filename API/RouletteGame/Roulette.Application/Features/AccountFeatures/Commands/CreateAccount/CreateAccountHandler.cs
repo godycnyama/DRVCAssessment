@@ -6,18 +6,19 @@ using Roulette.Domain.Entities;
 namespace Roulette.Application.Features.AccountFeatures.Commands.CreateAccount;
 public sealed class CreateAccountHandler : IRequestHandler<CreateAccountRequest, CreateAccountResponse>
 {
-    private readonly IAccountService _betService;
+    private readonly IAccountService _accountService;
     private readonly IMapper _mapper;
 
-    public CreateAccountHandler(IMapper mapper, IAccountService betService)
+    public CreateAccountHandler(IMapper mapper, IAccountService accountService)
     {
-        _betService = betService;
+        _accountService = accountService;
         _mapper = mapper;
     }
 
     public async Task<CreateAccountResponse> Handle(CreateAccountRequest request, CancellationToken cancellationToken)
     {
-        Account bet = _mapper.Map<Account>(request);
-        return await _betService.CreateAccount(bet);
+        Account account = _mapper.Map<Account>(request);
+        var response = await _accountService.CreateAccount(account);
+        return _mapper.Map<CreateAccountResponse>(response);
     }
 }

@@ -12,7 +12,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Roulette.Application\Roulette.Application.csproj" />
     <ProjectReference Include="..\Roulette.Infrastructure\Roulette.Infrastructure.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Common\Constants\" />
   </ItemGroup>
 
 </Project>

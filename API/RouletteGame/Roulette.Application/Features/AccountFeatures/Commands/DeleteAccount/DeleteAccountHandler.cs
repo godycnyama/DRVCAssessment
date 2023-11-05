@@ -7,12 +7,10 @@ namespace Roulette.Application.Features.AccountFeatures.Commands.DeleteAccount;
 public sealed class DeleteAccountHandler : IRequestHandler<DeleteAccountRequest, DeleteAccountResponse>
 {
     private readonly IAccountService _accountService;
-    private readonly IMapper _mapper;
 
-    public DeleteAccountHandler(IMapper mapper, IAccountService accountService)
+    public DeleteAccountHandler(IAccountService accountService)
     {
         _accountService = accountService;
-        _mapper = mapper;
     }
 
     public async Task<DeleteAccountResponse> Handle(DeleteAccountRequest request, CancellationToken cancellationToken)

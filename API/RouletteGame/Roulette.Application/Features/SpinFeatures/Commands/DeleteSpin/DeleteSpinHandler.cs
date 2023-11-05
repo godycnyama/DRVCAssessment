@@ -5,17 +5,17 @@ using Roulette.Application.Abstractions.Services;
 namespace Roulette.Application.Features.SpinFeatures.Commands.DeleteSpin;
 public sealed class DeleteSpinHandler : IRequestHandler<DeleteSpinRequest, DeleteSpinResponse>
 {
-    private readonly ISpinService payoutService;
+    private readonly ISpinService spinService;
     private readonly IMapper mapper;
 
-    public DeleteSpinHandler(IMapper _mapper, ISpinService _payoutService)
+    public DeleteSpinHandler(IMapper _mapper, ISpinService _spinService)
     {
-        payoutService = _payoutService;
+        spinService = _spinService;
         mapper = _mapper;
     }
 
     public async Task<DeleteSpinResponse> Handle(DeleteSpinRequest request, CancellationToken cancellationToken)
     {
-        return await payoutService.DeleteSpin(request.Id);
+        return await spinService.DeleteSpin(request.Id);
     }
 }

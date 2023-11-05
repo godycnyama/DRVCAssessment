@@ -1,4 +1,4 @@
-﻿namespace Roulette.Application.Features.BetFeatures.GetBet;
+﻿namespace Roulette.Application.Features.BetFeatures.Queries.GetBet;
 public sealed record GetBetResponse
 {
     public int Id { get; set; }

@@ -5,18 +5,18 @@ using Roulette.Application.Abstractions.Services;
 namespace Roulette.Application.Features.SpinFeatures.Queries.GetSpins;
 public sealed class GetSpinsHandler : IRequestHandler<GetSpinsRequest, List<GetSpinsResponse>>
 {
-    private readonly ISpinService payoutService;
+    private readonly ISpinService spinService;
     private readonly IMapper mapper;
 
-    public GetSpinsHandler(ISpinService _payoutService, IMapper _mapper)
+    public GetSpinsHandler(ISpinService _spinService, IMapper _mapper)
     {
-        payoutService = _payoutService;
+        spinService = _spinService;
         mapper = _mapper;
     }
     
     public async Task<List<GetSpinsResponse>> Handle(GetSpinsRequest request, CancellationToken cancellationToken)
     {
-        var payouts = await payoutService.GetAllSpins();
-        return mapper.Map<List<GetSpinsResponse>>(payouts);
+        var spins = await spinService.GetAllSpins();
+        return mapper.Map<List<GetSpinsResponse>>(spins);
     }
 }

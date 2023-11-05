@@ -3,7 +3,7 @@ using MediatR;
 using Roulette.Application.Abstractions.Services;
 using Roulette.Domain.Entities;
 
-namespace Roulette.Application.Features.BetFeatures.DeleteBet;
+namespace Roulette.Application.Features.BetFeatures.Commands.DeleteBet;
 public sealed class DeleteBetHandler : IRequestHandler<DeleteBetRequest, DeleteBetResponse>
 {
     private readonly IBetService betService;

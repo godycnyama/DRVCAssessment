@@ -1,7 +1,7 @@
 ﻿using Roulette.Application.Common.Models;
 
 namespace Roulette.Application.Features.AccountFeatures.Commands.CreateAccount;
-public class CreateAccountResponse
+public sealed record CreateAccountResponse
 {
     public int Id { get; set; }
     public string FirstName { get; set; }
