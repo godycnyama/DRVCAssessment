@@ -18,11 +18,11 @@ public static class ServiceExtensions
         services.AddDbContext<RouletteDataContext>(opt => opt.UseSqlite(connectionString));
         services.AddScoped<IUnitOfWork, UnitOfWork>();
         services.AddScoped<IBetRepository, BetRepository>();
-        services.AddScoped<IDepositRepository, DepositRepository>();
+        services.AddScoped<IAccountRepository, AccountRepository>();
         services.AddScoped<IPayoutRepository, PayoutRepository>();
         services.AddScoped<ISpinRepository, SpinRepository>();
         services.AddScoped<IBetService, BetService>();
-        services.AddScoped<IDepositService, DepositService>();
+        services.AddScoped<IAccountService, AccountService>();
         services.AddScoped<ISpinService, SpinService>();
         services.AddScoped<IPayoutService, PayoutService>();
     }

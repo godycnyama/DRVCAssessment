@@ -35,6 +35,11 @@ public class GenericRepository<T> : IGenericRepository<T> where T : class
     public T Get(Expression<Func<T, bool>> expression)
         => _entitiySet.FirstOrDefault(expression);
 
+    public async Task<T> Get(int id)
+    {
+        return await _context.Set<T>().FindAsync(id);
+    }
+
     public IEnumerable<T> GetAll()
         => _entitiySet.AsEnumerable();
 

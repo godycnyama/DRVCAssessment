@@ -18,11 +18,4 @@
     <ProjectReference Include="..\Roulette.Domain\Roulette.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Features\DepositFeatures\GetDeposit\" />
-    <Folder Include="Features\DepositFeatures\GetDeposits\" />
-    <Folder Include="Features\PayoutFeatures\GetPayout\" />
-    <Folder Include="Features\PayoutFeatures\GetPayouts\" />
-  </ItemGroup>
-
 </Project>

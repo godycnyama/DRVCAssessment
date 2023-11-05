@@ -9,7 +9,7 @@ namespace Roulette.Application.Abstractions.UnitOfWork;
 public interface IUnitOfWork
 {
     IBetRepository BetRepository { get; }
-    IDepositRepository DepositRepository { get; }
+    IAccountRepository AccountRepository { get; }
     ISpinRepository SpinRepository { get; }
     IPayoutRepository PayoutRepository { get; }
     void Commit();

@@ -10,6 +10,6 @@ public  class RouletteDataContext: DbContext
 
     public DbSet<Bet> Bets { get; set; }
     public DbSet<Spin> Spins { get; set; }
-    public DbSet<Deposit> Deposits { get; set; }
+    public DbSet<Account> Deposits { get; set; }
     public DbSet<Payout> Payouts { get; set; }
 }
