@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Roulette.Application.Abstractions.Services;
+using Roulette.Application.Exceptions;
 using Roulette.Application.Features.SpinFeatures.Commands.DeleteSpin;
 using Roulette.Application.Features.SpinFeatures.Queries.GetSpin;
 using Roulette.Application.Features.SpinFeatures.Queries.GetSpins;
@@ -26,20 +27,13 @@ public class SpinsController : ControllerBase
     [Route("roulette/api/v1/spins")]
     public async Task<IActionResult> GetAllSpins()
     {
-        try
-        {
-            var spins = await _mediator.Send(new GetSpinsRequest());
+        var spins = await _mediator.Send(new GetSpinsRequest());
 
-            if (spins == null)
-            {
-                return NotFound("No spin records found");
-            }
-            return Ok(spins);
-        }
-        catch (Exception ex)
+        if (spins == null)
         {
-            return BadRequest(ex.Message);
+            throw new SpinsNotFoundException();
         }
+        return Ok(spins);
     }
 
     //get spin by id
@@ -47,19 +41,12 @@ public class SpinsController : ControllerBase
     [Route("roulette/api/v1/spins/{id}")]
     public async Task<IActionResult> GetSpin(int id)
     {
-        try
+        var spin = await _mediator.Send(new GetSpinRequest(id));
+        if (spin == null)
         {
-            var spin = await _mediator.Send(new GetSpinRequest(id));
-            if (spin == null)
-            {
-                return NotFound("Spin not found");
-            }
-            return Ok(spin);
+            throw new SpinsNotFoundException(id.ToString());
         }
-        catch (Exception ex)
-        {
-            return BadRequest(ex.Message);
-        }
+        return Ok(spin);
     }
 
     //delete spin given spin id
@@ -67,14 +54,7 @@ public class SpinsController : ControllerBase
     [Route("roulette/api/spins/{id}")]
     public async Task<IActionResult> DeleteSpin(int id)
     {
-        try
-        {
-            var response = await _mediator.Send(new DeleteSpinRequest(id));
-            return Ok(response);
-        }
-        catch (Exception ex)
-        {
-            return BadRequest(ex.Message);
-        }
+        var response = await _mediator.Send(new DeleteSpinRequest(id));
+        return Ok(response);
     }
 }

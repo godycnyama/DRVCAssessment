@@ -3,17 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.6.33712.159
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Roulette.API", "Roulette.API\Roulette.API.csproj", "{11E9A3D1-D480-4B58-B022-E6E0183D6ED5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Roulette.API", "Roulette.API\Roulette.API.csproj", "{11E9A3D1-D480-4B58-B022-E6E0183D6ED5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Roulette.Application", "Roulette.Application\Roulette.Application.csproj", "{0A17A949-08E0-4512-8F55-4B7EC9153C8A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Roulette.Application", "Roulette.Application\Roulette.Application.csproj", "{0A17A949-08E0-4512-8F55-4B7EC9153C8A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Roulette.Domain", "Roulette.Domain\Roulette.Domain.csproj", "{2E381AC4-49A0-44BC-84EC-BBB52F38E9D7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Roulette.Domain", "Roulette.Domain\Roulette.Domain.csproj", "{2E381AC4-49A0-44BC-84EC-BBB52F38E9D7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Roulette.Infrastructure", "Roulette.Infrastructure\Roulette.Infrastructure.csproj", "{F405F8CE-1145-4213-8CF0-BE8EBD8285CF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Roulette.Infrastructure", "Roulette.Infrastructure\Roulette.Infrastructure.csproj", "{F405F8CE-1145-4213-8CF0-BE8EBD8285CF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Roulette.Shared", "Roulette.Shared\Roulette.Shared.csproj", "{3F86EF62-A1D4-4767-B209-18B3DE1AD8CC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Roulette.Shared", "Roulette.Shared\Roulette.Shared.csproj", "{3F86EF62-A1D4-4767-B209-18B3DE1AD8CC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Roulette.UnitTests", "Roulette.UnitTests\Roulette.UnitTests.csproj", "{71285C97-DBE1-4CAE-A791-93137F212B11}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Roulette.UnitTests", "Roulette.UnitTests\Roulette.UnitTests.csproj", "{71285C97-DBE1-4CAE-A791-93137F212B11}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

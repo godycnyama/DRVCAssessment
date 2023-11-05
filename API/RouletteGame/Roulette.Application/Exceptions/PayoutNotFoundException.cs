@@ -6,12 +6,12 @@ public class PayoutNotFoundException : Exception
     }
 
     public PayoutNotFoundException(string message)
-        : base(message)
+        : base($"Payout with id: {message} not found")
     {
     }
 
     public PayoutNotFoundException(string message, Exception inner)
-        : base(message, inner)
+        : base($"Payout with id: {message} not found", inner)
     {
     }
 }

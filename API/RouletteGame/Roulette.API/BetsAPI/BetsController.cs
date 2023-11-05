@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Roulette.Application.Abstractions.Services;
+using Roulette.Application.Exceptions;
 using Roulette.Application.Features.BetFeatures.Commands.CreateBet;
 using Roulette.Application.Features.BetFeatures.Commands.DeleteBet;
 using Roulette.Application.Features.BetFeatures.Commands.UpdateBet;
@@ -28,20 +29,13 @@ public class BetsController : ControllerBase
     [Route("roulette/api/v1/bets")]
     public async Task<IActionResult> GetAllBets()
     {
-        try
-        {
-            var bets = await _mediator.Send(new GetBetsRequest());
+        var bets = await _mediator.Send(new GetBetsRequest());
 
-            if (bets == null)
-            {
-                return NotFound("No bet records found");
-            }
-            return Ok(bets);
-        }
-        catch (Exception ex)
+        if (bets == null)
         {
-            return BadRequest(ex.Message);
+            throw new BetsNotFoundException();
         }
+        return Ok(bets);
     }
 
     //get bet by id
@@ -49,19 +43,12 @@ public class BetsController : ControllerBase
     [Route("roulette/api/v1/bets/{id}")]
     public async Task<IActionResult> GetBet(int id)
     {
-        try
+        var bet = await _mediator.Send(new GetBetRequest(id));
+        if (bet == null)
         {
-            var bet = await _mediator.Send(new GetBetRequest(id));
-            if (bet == null)
-            {
-                return NotFound("Bet not found");
-            }
-            return Ok(bet);
+            throw new BetNotFoundException(id.ToString());
         }
-        catch (Exception ex)
-        {
-            return BadRequest(ex.Message);
-        }
+        return Ok(bet);
     }
 
     //update bet
@@ -69,15 +56,8 @@ public class BetsController : ControllerBase
     [Route("roulette/api/v1/bets")]
     public async Task<IActionResult> UpdateBet([FromBody] UpdateBetRequest updateBetRequest)
     {
-        try
-        {
-            var response = await _mediator.Send(updateBetRequest);
-            return Ok(response);
-        }
-        catch (Exception ex)
-        {
-            return BadRequest(ex.Message);
-        }
+        var response = await _mediator.Send(updateBetRequest);
+        return Ok(response);
     }
 
     //create new bet
@@ -85,15 +65,8 @@ public class BetsController : ControllerBase
     [Route("roulette/api/v1/bets")]
     public async Task<IActionResult> CreateBet([FromBody] CreateBetRequest createBetRequest)
     {
-        try
-        {
-            var response = await _mediator.Send(createBetRequest);
-            return Ok(response);
-        }
-        catch (Exception ex)
-        {
-            return BadRequest(ex.Message);
-        }
+        var response = await _mediator.Send(createBetRequest);
+        return Ok(response);
     }
 
     //delete bet given bet id
@@ -101,14 +74,7 @@ public class BetsController : ControllerBase
     [Route("roulette/api/bets/{id}")]
     public async Task<IActionResult> DeleteBet(int id)
     {
-        try
-        {
-            var response = await _mediator.Send(new DeleteBetRequest(id));
-            return Ok(response);
-        }
-        catch (Exception ex)
-        {
-            return BadRequest(ex.Message);
-        }
+        var response = await _mediator.Send(new DeleteBetRequest(id));
+        return Ok(response);
     }
 }

@@ -5,12 +5,12 @@ public class BetsNotFoundException : Exception
     {
     }
 
-    public BetsNotFoundException(string message)
+    public BetsNotFoundException(string message = "No bet records found")
         : base(message)
     {
     }
 
-    public BetsNotFoundException(string message, Exception inner)
+    public BetsNotFoundException(Exception inner, string message = "No bet records found")
         : base(message, inner)
     {
     }

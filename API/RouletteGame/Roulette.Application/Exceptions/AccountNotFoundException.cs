@@ -6,12 +6,12 @@ public class AccountNotFoundException : Exception
     }
 
     public AccountNotFoundException(string message)
-        : base(message)
+        : base($"Account with id: {message} not found")
     {
     }
 
     public AccountNotFoundException(string message, Exception inner)
-        : base(message, inner)
+        : base($"Account with id: {message} not found", inner)
     {
     }
 }

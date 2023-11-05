@@ -5,12 +5,12 @@ public class PayoutsNotFoundException : Exception
     {
     }
 
-    public PayoutsNotFoundException(string message)
+    public PayoutsNotFoundException(string message = "No payout records found")
         : base(message)
     {
     }
 
-    public PayoutsNotFoundException(string message, Exception inner)
+    public PayoutsNotFoundException(Exception inner, string message = "No payout records found")
         : base(message, inner)
     {
     }

@@ -6,12 +6,12 @@ public class BetNotFoundException : Exception
     }
 
     public BetNotFoundException(string message)
-        : base(message)
+        : base($"Bet with id: {message} not found")
     {
     }
 
     public BetNotFoundException(string message, Exception inner)
-        : base(message, inner)
+        : base($"Bet with id: {message} not found", inner)
     {
     }
 }

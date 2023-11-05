@@ -5,12 +5,12 @@ public class SpinsNotFoundException : Exception
     {
     }
 
-    public SpinsNotFoundException(string message)
+    public SpinsNotFoundException(string message = "No spin records found")
         : base(message)
     {
     }
 
-    public SpinsNotFoundException(string message, Exception inner)
+    public SpinsNotFoundException(Exception inner, string message = "No spin records found")
         : base(message, inner)
     {
     }

@@ -1,6 +1,6 @@
-﻿using Roulette.Application.Features.PayoutFeatures.CreatePayout;
-using Roulette.Application.Features.PayoutFeatures.DeletePayout;
-using Roulette.Application.Features.PayoutFeatures.UpdatePayout;
+﻿using Roulette.Application.Features.PayoutFeatures.Commands.CreatePayout;
+using Roulette.Application.Features.PayoutFeatures.Commands.DeletePayout;
+using Roulette.Application.Features.PayoutFeatures.Commands.UpdatePayout;
 using Roulette.Domain.Entities;
 
 namespace Roulette.Application.Abstractions.Services;

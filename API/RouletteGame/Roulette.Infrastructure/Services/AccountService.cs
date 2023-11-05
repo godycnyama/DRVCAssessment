@@ -1,5 +1,6 @@
 ﻿using Roulette.Application.Abstractions.Services;
 using Roulette.Application.Abstractions.UnitOfWork;
+using Roulette.Application.Exceptions;
 using Roulette.Application.Features.AccountFeatures.Commands.CreateAccount;
 using Roulette.Application.Features.AccountFeatures.Commands.DeleteAccount;
 using Roulette.Application.Features.AccountFeatures.Commands.UpdateAccount;
@@ -34,7 +35,7 @@ public class AccountService : IAccountService
         Account _account = await _unitOfWork.AccountRepository.GetAsync(item => item.Id == account.Id, CancellationToken.None);
         if (_account == null)
         {
-            throw new Exception($"Account with id: {account.Id} not found");
+            throw new AccountNotFoundException(account.Id.ToString());
         }
         _unitOfWork.AccountRepository.Update(_account);
         await _unitOfWork.CommitAsync();
@@ -46,7 +47,7 @@ public class AccountService : IAccountService
         Account _account = await _unitOfWork.AccountRepository.GetAsync(item => item.Id == id, CancellationToken.None);
         if (_account == null)
         {
-            throw new Exception($"Account with id: {id} not found");
+            throw new AccountNotFoundException(id.ToString());
         }
         _account.Balance = amount;
         _unitOfWork.AccountRepository.Update(_account);
@@ -59,7 +60,7 @@ public class AccountService : IAccountService
         Account _account = await _unitOfWork.AccountRepository.GetAsync(item => item.Id == id, CancellationToken.None);
         if (_account == null)
         {
-            throw new Exception($"Account with id: {id} not found");
+            throw new AccountNotFoundException(id.ToString());
         }
         _unitOfWork.AccountRepository.Remove(_account);
         await _unitOfWork.CommitAsync();

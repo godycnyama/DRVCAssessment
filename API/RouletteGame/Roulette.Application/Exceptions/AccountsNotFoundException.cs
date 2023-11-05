@@ -5,12 +5,12 @@ public class AccountsNotFoundException : Exception
     {
     }
 
-    public AccountsNotFoundException(string message)
+    public AccountsNotFoundException(string message = "No account records found")
         : base(message)
     {
     }
 
-    public AccountsNotFoundException(string message, Exception inner)
+    public AccountsNotFoundException(Exception inner, string message = "No account records found")
         : base(message, inner)
     {
     }

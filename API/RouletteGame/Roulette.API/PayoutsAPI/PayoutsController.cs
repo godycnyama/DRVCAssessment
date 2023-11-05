@@ -2,6 +2,7 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Roulette.Application.Abstractions.Services;
+using Roulette.Application.Exceptions;
 using Roulette.Application.Features.PayoutFeatures.Commands.CreatePayout;
 using Roulette.Application.Features.PayoutFeatures.Commands.DeletePayout;
 using Roulette.Application.Features.PayoutFeatures.Commands.UpdatePayout;
@@ -29,20 +30,13 @@ public class PayoutsController : ControllerBase
     [Route("roulette/api/v1/payouts")]
     public async Task<IActionResult> GetAllPayouts()
     {
-        try
-        {
-            var payouts = await _mediator.Send(new GetPayoutsRequest());
+        var payouts = await _mediator.Send(new GetPayoutsRequest());
 
-            if (payouts == null)
-            {
-                return NotFound("No payout records found");
-            }
-            return Ok(payouts);
-        }
-        catch (Exception ex)
+        if (payouts == null)
         {
-            return BadRequest(ex.Message);
+            throw new PayoutsNotFoundException();
         }
+        return Ok(payouts);
     }
 
     //get payout by id
@@ -50,19 +44,12 @@ public class PayoutsController : ControllerBase
     [Route("roulette/api/v1/payouts/{id}")]
     public async Task<IActionResult> GetPayout(int id)
     {
-        try
+        var payout = await _mediator.Send(new GetPayoutRequest(id));
+        if (payout == null)
         {
-            var payout = await _mediator.Send(new GetPayoutRequest(id));
-            if (payout == null)
-            {
-                return NotFound("Payout not found");
-            }
-            return Ok(payout);
+            throw new PayoutNotFoundException(id.ToString());
         }
-        catch (Exception ex)
-        {
-            return BadRequest(ex.Message);
-        }
+        return Ok(payout);
     }
 
     //update payout
@@ -70,15 +57,8 @@ public class PayoutsController : ControllerBase
     [Route("roulette/api/v1/payouts")]
     public async Task<IActionResult> UpdatePayout([FromBody] UpdatePayoutRequest updatePayoutRequest)
     {
-        try
-        {
-            var response = await _mediator.Send(updatePayoutRequest);
-            return Ok(response);
-        }
-        catch (Exception ex)
-        {
-            return BadRequest(ex.Message);
-        }
+        var response = await _mediator.Send(updatePayoutRequest);
+        return Ok(response);
     }
 
     //create new payout
@@ -86,15 +66,8 @@ public class PayoutsController : ControllerBase
     [Route("roulette/api/v1/payouts")]
     public async Task<IActionResult> CreatePayout([FromBody] CreatePayoutRequest createPayoutRequest)
     {
-        try
-        {
-            var response = await _mediator.Send(createPayoutRequest);
-            return Ok(response);
-        }
-        catch (Exception ex)
-        {
-            return BadRequest(ex.Message);
-        }
+        var response = await _mediator.Send(createPayoutRequest);
+        return Ok(response);
     }
 
     //delete payout given payout id
@@ -102,14 +75,7 @@ public class PayoutsController : ControllerBase
     [Route("roulette/api/payouts/{id}")]
     public async Task<IActionResult> DeletePayout(int id)
     {
-        try
-        {
-            var response = await _mediator.Send(new DeletePayoutRequest(id));
-            return Ok(response);
-        }
-        catch (Exception ex)
-        {
-            return BadRequest(ex.Message);
-        }
+        var response = await _mediator.Send(new DeletePayoutRequest(id));
+        return Ok(response);
     }
 }

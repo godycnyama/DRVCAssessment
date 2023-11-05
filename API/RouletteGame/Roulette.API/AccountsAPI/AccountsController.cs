@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Roulette.Application.Abstractions.Services;
+using Roulette.Application.Exceptions;
 using Roulette.Application.Features.AccountFeatures.Commands.CreateAccount;
 using Roulette.Application.Features.AccountFeatures.Commands.DeleteAccount;
 using Roulette.Application.Features.AccountFeatures.Commands.DepositAccount;
@@ -29,20 +30,13 @@ public class AccountController : ControllerBase
     [Route("roulette/api/v1/accounts")]
     public async Task<IActionResult> GetAllAccounts()
     {
-        try
-        {
-            var accounts = await _mediator.Send(new GetAccountsRequest());
+        var accounts = await _mediator.Send(new GetAccountsRequest());
 
-            if (accounts == null)
-            {
-                return NotFound("No account records found");
-            }
-            return Ok(accounts);
-        }
-        catch (Exception ex)
+        if (accounts == null)
         {
-            return BadRequest(ex.Message);
+            throw new AccountsNotFoundException();
         }
+        return Ok(accounts);
     }
 
     //get account by id
@@ -50,19 +44,12 @@ public class AccountController : ControllerBase
     [Route("roulette/api/v1/accounts/{id}")]
     public async Task<IActionResult> GetAccount(int id)
     {
-        try
+        var account = await _mediator.Send(new GetAccountRequest(id));
+        if (account == null)
         {
-            var account = await _mediator.Send(new GetAccountRequest(id));
-            if (account == null)
-            {
-                return NotFound("Account not found");
-            }
-            return Ok(account);
+            throw new AccountNotFoundException(id.ToString());
         }
-        catch (Exception ex)
-        {
-            return BadRequest(ex.Message);
-        }
+        return Ok(account);
     }
 
     //update account
@@ -70,15 +57,8 @@ public class AccountController : ControllerBase
     [Route("roulette/api/v1/accounts")]
     public async Task<IActionResult> UpdateAccount([FromBody] UpdateAccountRequest updateAccountRequest)
     {
-        try
-        {
-            var response = await _mediator.Send(updateAccountRequest);
-            return Ok(response);
-        }
-        catch (Exception ex)
-        {
-            return BadRequest(ex.Message);
-        }
+        var response = await _mediator.Send(updateAccountRequest);
+        return Ok(response);
     }
 
     //deposit money in account
@@ -86,15 +66,8 @@ public class AccountController : ControllerBase
     [Route("roulette/api/v1/accounts/deposit")]
     public async Task<IActionResult> DepositAccount([FromBody] DepositAccountRequest depositAccountRequest)
     {
-        try
-        {
-            var response = await _mediator.Send(depositAccountRequest);
-            return Ok(response);
-        }
-        catch (Exception ex)
-        {
-            return BadRequest(ex.Message);
-        }
+        var response = await _mediator.Send(depositAccountRequest);
+        return Ok(response);
     }
 
     //create new account
@@ -102,15 +75,8 @@ public class AccountController : ControllerBase
     [Route("roulette/api/v1/accounts")]
     public async Task<IActionResult> CreateAccount([FromBody] CreateAccountRequest createAccountRequest)
     {
-        try
-        {
-            var response = await _mediator.Send(createAccountRequest);
-            return Ok(response);
-        }
-        catch (Exception ex)
-        {
-            return BadRequest(ex.Message);
-        }
+        var response = await _mediator.Send(createAccountRequest);
+        return Ok(response);
     }
 
     //delete account given account id
@@ -118,14 +84,7 @@ public class AccountController : ControllerBase
     [Route("roulette/api/accounts/{id}")]
     public async Task<IActionResult> DeleteAccount(int id)
     {
-        try
-        {
-            var response = await _mediator.Send(new DeleteAccountRequest(id));
-            return Ok(response);
-        }
-        catch (Exception ex)
-        {
-            return BadRequest(ex.Message);
-        }
+        var response = await _mediator.Send(new DeleteAccountRequest(id));
+        return Ok(response);
     }
 }

@@ -1,8 +1,9 @@
 ﻿using Roulette.Application.Abstractions.Services;
 using Roulette.Application.Abstractions.UnitOfWork;
-using Roulette.Application.Features.PayoutFeatures.CreatePayout;
-using Roulette.Application.Features.PayoutFeatures.DeletePayout;
-using Roulette.Application.Features.PayoutFeatures.UpdatePayout;
+using Roulette.Application.Exceptions;
+using Roulette.Application.Features.PayoutFeatures.Commands.CreatePayout;
+using Roulette.Application.Features.PayoutFeatures.Commands.DeletePayout;
+using Roulette.Application.Features.PayoutFeatures.Commands.UpdatePayout;
 using Roulette.Domain.Entities;
 
 namespace Roulette.Infrastructure.Services;
@@ -34,7 +35,7 @@ public class PayoutService : IPayoutService
         Payout _payout = await _unitOfWork.PayoutRepository.GetAsync(item => item.Id == payout.Id, CancellationToken.None);
         if (_payout == null)
         {
-            throw new Exception($"Payout with id: {payout.Id} not found");
+            throw new PayoutNotFoundException(payout.Id.ToString());
         }
         _unitOfWork.PayoutRepository.Update(_payout);
         await _unitOfWork.CommitAsync();
@@ -46,7 +47,7 @@ public class PayoutService : IPayoutService
         Payout _payout = await _unitOfWork.PayoutRepository.GetAsync(item => item.Id == id, CancellationToken.None);
         if (_payout == null)
         {
-            throw new Exception($"Payout with id: {id} not found");
+            throw new PayoutNotFoundException(id.ToString());
         }
         _unitOfWork.PayoutRepository.Remove(_payout);
         await _unitOfWork.CommitAsync();

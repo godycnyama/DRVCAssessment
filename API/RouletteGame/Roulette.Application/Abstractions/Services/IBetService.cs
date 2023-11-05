@@ -1,6 +1,6 @@
-﻿using Roulette.Application.Features.BetFeatures.CreateBet;
-using Roulette.Application.Features.BetFeatures.DeleteBet;
-using Roulette.Application.Features.BetFeatures.UpdateBet;
+﻿using Roulette.Application.Features.BetFeatures.Commands.CreateBet;
+using Roulette.Application.Features.BetFeatures.Commands.DeleteBet;
+using Roulette.Application.Features.BetFeatures.Commands.UpdateBet;
 using Roulette.Domain.Entities;
 
 namespace Roulette.Application.Abstractions.Services;

@@ -6,12 +6,12 @@ public class SpinNotFoundException : Exception
     }
 
     public SpinNotFoundException(string message)
-        : base(message)
+        : base($"Spin with id: {message} not found")
     {
     }
 
     public SpinNotFoundException(string message, Exception inner)
-        : base(message, inner)
+        : base($"Spin with id: {message} not found", inner)
     {
     }
 }
