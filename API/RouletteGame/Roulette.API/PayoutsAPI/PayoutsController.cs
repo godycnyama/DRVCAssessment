@@ -1,7 +1,6 @@
 ﻿
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Roulette.Application.Abstractions.Services;
 using Roulette.Application.Exceptions;
 using Roulette.Application.Features.PayoutFeatures.Commands.CreatePayout;
 using Roulette.Application.Features.PayoutFeatures.Commands.DeletePayout;
@@ -16,12 +15,10 @@ namespace Roulette.API.PayoutsAPI;
 [ApiController]
 public class PayoutsController : ControllerBase
 {
-    private readonly IPayoutService _payoutsService;
     private readonly IMediator _mediator;
 
-    public PayoutsController(IPayoutService payoutsService, IMediator mediator)
+    public PayoutsController(IMediator mediator)
     {
-        _payoutsService = payoutsService;
         _mediator = mediator;
     }
 

@@ -1,6 +1,5 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Roulette.Application.Abstractions.Services;
 using Roulette.Application.Exceptions;
 using Roulette.Application.Features.AccountFeatures.Commands.CreateAccount;
 using Roulette.Application.Features.AccountFeatures.Commands.DeleteAccount;
@@ -16,12 +15,10 @@ namespace Roulette.API.AccountAPI;
 [ApiController]
 public class AccountController : ControllerBase
 {
-    private readonly IAccountService _accountsService;
     private readonly IMediator _mediator;
 
-    public AccountController(IAccountService accountsService, IMediator mediator)
+    public AccountController(IMediator mediator)
     {
-        _accountsService = accountsService;
         _mediator = mediator;
     }
 

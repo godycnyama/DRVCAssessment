@@ -9,6 +9,6 @@ public interface IPayoutService
     Task<CreatePayoutResponse> CreatePayout(Payout payout);
     Task<DeletePayoutResponse> DeletePayout(int id);
     Task<IEnumerable<Payout>> GetAllPayouts();
-    Task<Payout> GetPayout(int id, CancellationToken cancellationToken);
+    Task<Payout> GetPayout(int id);
     Task<UpdatePayoutResponse> UpdatePayout(Payout payout);
 }

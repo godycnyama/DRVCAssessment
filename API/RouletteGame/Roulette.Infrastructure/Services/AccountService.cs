@@ -21,7 +21,7 @@ public class AccountService : IAccountService
     }
     public async Task<Account> GetAccount(int id, CancellationToken cancellationToken)
     {
-        return await _unitOfWork.AccountRepository.GetAsync(item => item.Id == id, cancellationToken);
+        return await _unitOfWork.AccountRepository.GetAsync(item => item.Id == id);
 
     }
     public async Task<Account> CreateAccount(Account account)
@@ -32,7 +32,7 @@ public class AccountService : IAccountService
     }
     public async Task<Account> UpdateAccount(Account account)
     {
-        Account _account = await _unitOfWork.AccountRepository.GetAsync(item => item.Id == account.Id, CancellationToken.None);
+        Account _account = await _unitOfWork.AccountRepository.GetAsync(item => item.Id == account.Id);
         if (_account == null)
         {
             throw new AccountNotFoundException(account.Id.ToString());
@@ -44,7 +44,7 @@ public class AccountService : IAccountService
 
     public async Task<Account> Deposit(int id, decimal amount)
     {
-        Account _account = await _unitOfWork.AccountRepository.GetAsync(item => item.Id == id, CancellationToken.None);
+        Account _account = await _unitOfWork.AccountRepository.GetAsync(item => item.Id == id);
         if (_account == null)
         {
             throw new AccountNotFoundException(id.ToString());
@@ -57,7 +57,7 @@ public class AccountService : IAccountService
 
     public async Task<DeleteAccountResponse> DeleteAccount(int id)
     {
-        Account _account = await _unitOfWork.AccountRepository.GetAsync(item => item.Id == id, CancellationToken.None);
+        Account _account = await _unitOfWork.AccountRepository.GetAsync(item => item.Id == id);
         if (_account == null)
         {
             throw new AccountNotFoundException(id.ToString());

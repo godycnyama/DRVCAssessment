@@ -23,21 +23,21 @@ public class GenericRepository<T> : IGenericRepository<T> where T : class
     public void Add(T entity)
         => _dbContext.Add(entity);
 
-    public async Task AddAsync(T entity, CancellationToken cancellationToken = default)
-        => await _dbContext.AddAsync(entity, cancellationToken);
+    public async Task AddAsync(T entity)
+        => await _dbContext.AddAsync(entity);
 
     public void AddRange(IEnumerable<T> entities)
         => _dbContext.AddRange(entities);
 
-    public async Task AddRangeAsync(IEnumerable<T> entities, CancellationToken cancellationToken = default)
-        => await _dbContext.AddRangeAsync(entities, cancellationToken);
+    public async Task AddRangeAsync(IEnumerable<T> entities)
+        => await _dbContext.AddRangeAsync(entities);
 
     public T Get(Expression<Func<T, bool>> expression)
         => _entitiySet.FirstOrDefault(expression);
 
     public async Task<T> Get(int id)
     {
-        return await _context.Set<T>().FindAsync(id);
+        return await _dbContext.Set<T>().FindAsync(id);
     }
 
     public IEnumerable<T> GetAll()
@@ -46,14 +46,14 @@ public class GenericRepository<T> : IGenericRepository<T> where T : class
     public IEnumerable<T> GetAll(Expression<Func<T, bool>> expression)
         => _entitiySet.Where(expression).AsEnumerable();
 
-    public async Task<IEnumerable<T>> GetAllAsync(CancellationToken cancellationToken = default)
-        => await _entitiySet.ToListAsync(cancellationToken);
+    public async Task<IEnumerable<T>> GetAllAsync()
+        => await _entitiySet.ToListAsync();
 
-    public async Task<IEnumerable<T>> GetAllAsync(Expression<Func<T, bool>> expression, CancellationToken cancellationToken = default)
-        => await _entitiySet.Where(expression).ToListAsync(cancellationToken);
+    public async Task<IEnumerable<T>> GetAllAsync(Expression<Func<T, bool>> expression)
+        => await _entitiySet.Where(expression).ToListAsync();
 
-    public async Task<T> GetAsync(Expression<Func<T, bool>> expression, CancellationToken cancellationToken = default)
-        => await _entitiySet.FirstOrDefaultAsync(expression, cancellationToken);
+    public async Task<T> GetAsync(Expression<Func<T, bool>> expression)
+        => await _entitiySet.FirstOrDefaultAsync(expression);
 
     public void Remove(T entity)
         => _dbContext.Remove(entity);

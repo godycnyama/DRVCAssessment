@@ -1,6 +1,5 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Roulette.Application.Abstractions.Services;
 using Roulette.Application.Exceptions;
 using Roulette.Application.Features.BetFeatures.Commands.CreateBet;
 using Roulette.Application.Features.BetFeatures.Commands.DeleteBet;
@@ -15,12 +14,10 @@ namespace Roulette.API.BetsAPI;
 [ApiController]
 public class BetsController : ControllerBase
 {
-    private readonly IBetService _betsService;
     private readonly IMediator _mediator;
 
-    public BetsController(IBetService betsService, IMediator mediator)
+    public BetsController(IMediator mediator)
     {
-        _betsService = betsService;
         _mediator = mediator;
     }
 

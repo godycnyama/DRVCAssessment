@@ -19,9 +19,9 @@ public class PayoutService : IPayoutService
         return await _unitOfWork.PayoutRepository.GetAllAsync();
 
     }
-    public async Task<Payout> GetPayout(int id, CancellationToken cancellationToken)
+    public async Task<Payout> GetPayout(int id)
     {
-        return await _unitOfWork.PayoutRepository.GetAsync(item => item.Id == id, cancellationToken);
+        return await _unitOfWork.PayoutRepository.GetAsync(item => item.Id == id);
 
     }
     public async Task<CreatePayoutResponse> CreatePayout(Payout payout)
@@ -32,7 +32,7 @@ public class PayoutService : IPayoutService
     }
     public async Task<UpdatePayoutResponse> UpdatePayout(Payout payout)
     {
-        Payout _payout = await _unitOfWork.PayoutRepository.GetAsync(item => item.Id == payout.Id, CancellationToken.None);
+        Payout _payout = await _unitOfWork.PayoutRepository.GetAsync(item => item.Id == payout.Id);
         if (_payout == null)
         {
             throw new PayoutNotFoundException(payout.Id.ToString());
@@ -44,7 +44,7 @@ public class PayoutService : IPayoutService
 
     public async Task<DeletePayoutResponse> DeletePayout(int id)
     {
-        Payout _payout = await _unitOfWork.PayoutRepository.GetAsync(item => item.Id == id, CancellationToken.None);
+        Payout _payout = await _unitOfWork.PayoutRepository.GetAsync(item => item.Id == id);
         if (_payout == null)
         {
             throw new PayoutNotFoundException(id.ToString());

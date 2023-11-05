@@ -18,13 +18,13 @@ public class SpinService : ISpinService
     }
     public async Task<Spin> GetSpin(int id, CancellationToken cancellationToken)
     {
-        return await _unitOfWork.SpinRepository.GetAsync(item => item.Id == id, cancellationToken);
+        return await _unitOfWork.SpinRepository.GetAsync(item => item.Id == id);
 
     }
 
     public async Task<DeleteSpinResponse> DeleteSpin(int id)
     {
-        Spin _spin = await _unitOfWork.SpinRepository.GetAsync(item => item.Id == id, CancellationToken.None);
+        Spin _spin = await _unitOfWork.SpinRepository.GetAsync(item => item.Id == id);
         if (_spin == null)
         {
 

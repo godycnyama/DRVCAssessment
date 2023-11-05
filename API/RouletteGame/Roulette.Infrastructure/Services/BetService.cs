@@ -22,7 +22,7 @@ public class BetService : IBetService
     }
     public async Task<Bet> GetBet(int id, CancellationToken cancellationToken)
     {
-        return await _unitOfWork.BetRepository.GetAsync(item => item.Id == id, cancellationToken);
+        return await _unitOfWork.BetRepository.GetAsync(item => item.Id == id);
 
     }
     public async Task<CreateBetResponse> CreateBet(Bet bet)
@@ -33,7 +33,7 @@ public class BetService : IBetService
     }
     public async Task<UpdateBetResponse> UpdateBet(Bet bet)
     {
-        Bet _bet = await _unitOfWork.BetRepository.GetAsync(item => item.Id == bet.Id, CancellationToken.None);
+        Bet _bet = await _unitOfWork.BetRepository.GetAsync(item => item.Id == bet.Id);
         if (_bet == null)
         {
             throw new BetNotFoundException(bet.Id.ToString());
@@ -45,8 +45,8 @@ public class BetService : IBetService
 
     public async Task<DeleteBetResponse> DeleteBet(int id)
     {
-        Bet _bet = await _unitOfWork.BetRepository.GetAsync(item => item.Id == id, CancellationToken.None);
-        if (_bet == null)
+            Bet _bet = await _unitOfWork.BetRepository.GetAsync(item => item.Id == id);
+            if (_bet == null)
         {
             throw new BetNotFoundException(id.ToString());
         }

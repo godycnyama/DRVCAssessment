@@ -12,4 +12,3 @@ public interface IBetService
     Task<Bet> GetBet(int id, CancellationToken cancellationToken);
     Task<UpdateBetResponse> UpdateBet(Bet bet);
 }
-}
