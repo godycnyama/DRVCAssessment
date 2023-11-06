@@ -14,25 +14,141 @@ namespace Roulette.UnitTests.ServicesUnitTests;
 [TestClass]
 public class AccountServiceUnitTests
 {
+    private Mock<IUnitOfWork> _unitOfWorkMock;
+    private AccountService _accountService;
+
+    [TestInitialize]
+    public void Initialize()
+    {
+        _unitOfWorkMock = new Mock<IUnitOfWork>();
+        _accountService = new AccountService(_unitOfWorkMock.Object);
+    }
+
     [TestMethod]
-    public async Task GetAllAccounts_ReturnsAllAccounts()
+    public async Task GetAllAccounts_ShouldReturnAllAccounts_GivenAccountsExistInDatabase()
     {
         // Arrange
-        var unitOfWorkMock = new Mock<IUnitOfWork>();
-        var accountService = new AccountService(unitOfWorkMock.Object);
-
-        // Mock the behavior of the repository and unit of work
-        unitOfWorkMock.Setup(u => u.AccountRepository.GetAllAsync()).ReturnsAsync(new List<Account>
-            {
-                new Account { Id = 1,FirstName = "James", LastName = "Mug", UserName = "Jimalo", Balance = 1000 },
-                new Account { Id = 2, FirstName = "Amos", LastName = "Smut", UserName = "Smua", Balance = 2000 }
-            });
+        var accounts = new List<Account> { new Account(), new Account() };
+        _unitOfWorkMock.Setup(x => x.AccountRepository.GetAllAsync()).ReturnsAsync(accounts);
 
         // Act
-        var accounts = await accountService.GetAllAccounts();
+        var result = await _accountService.GetAllAccounts();
 
         // Assert
-        Assert.IsNotNull(accounts);
-        Assert.AreEqual(2, accounts.Count());
+        Assert.AreEqual(accounts.Count, result.ToList().Count);
+    }
+
+    [TestMethod]
+    public async Task GetAccount_ShouldReturnAccountWithGivenId()
+    {
+        // Arrange
+        var account = new Account { Id = 1 };
+        _unitOfWorkMock.Setup(x => x.AccountRepository.GetAsync(It.IsAny<System.Linq.Expressions.Expression<System.Func<Account, bool>>>())).ReturnsAsync(account);
+
+        // Act
+        var result = await _accountService.GetAccount(1, CancellationToken.None);
+
+        // Assert
+        Assert.AreEqual(account.Id, result.Id);
+    }
+
+    [TestMethod]
+    public async Task CreateAccount_ShouldAddAccountToRepository()
+    {
+        // Arrange
+        var account = new Account();
+        _unitOfWorkMock.Setup(x => x.AccountRepository.Add(account));
+
+        // Act
+        var result = await _accountService.CreateAccount(account);
+
+        // Assert
+        _unitOfWorkMock.Verify(x => x.AccountRepository.Add(account), Times.Once);
+        _unitOfWorkMock.Verify(x => x.CommitAsync(), Times.Once);
+        Assert.AreEqual(account, result);
+    }
+
+    [TestMethod]
+    public async Task UpdateAccount_ShouldUpdateAccountInRepository()
+    {
+        // Arrange
+        var account = new Account { Id = 1 };
+        _unitOfWorkMock.Setup(x => x.AccountRepository.GetAsync(It.IsAny<System.Linq.Expressions.Expression<System.Func<Account, bool>>>())).ReturnsAsync(account);
+
+        // Act
+        var result = await _accountService.UpdateAccount(account);
+
+        // Assert
+        _unitOfWorkMock.Verify(x => x.AccountRepository.Update(account), Times.Once);
+        _unitOfWorkMock.Verify(x => x.CommitAsync(), Times.Once);
+        Assert.AreEqual(account, result);
+    }
+
+    [TestMethod]
+    public async Task Deposit_ShouldUpdateAccountBalanceInRepository()
+    {
+        // Arrange
+        var account = new Account { Id = 1 };
+        _unitOfWorkMock.Setup(x => x.AccountRepository.GetAsync(It.IsAny<System.Linq.Expressions.Expression<System.Func<Account, bool>>>())).ReturnsAsync(account);
+
+        // Act
+        var result = await _accountService.Deposit(1, 100);
+
+        // Assert
+        _unitOfWorkMock.Verify(x => x.AccountRepository.Update(account), Times.Once);
+        _unitOfWorkMock.Verify(x => x.CommitAsync(), Times.Once);
+        Assert.AreEqual(100, result.Balance);
+    }
+
+    [TestMethod]
+    public async Task DeleteAccount_ShouldRemoveAccountFromRepository()
+    {
+        // Arrange
+        var account = new Account { Id = 1 };
+        _unitOfWorkMock.Setup(x => x.AccountRepository.GetAsync(It.IsAny<System.Linq.Expressions.Expression<System.Func<Account, bool>>>())).ReturnsAsync(account);
+
+        // Act
+        var result = await _accountService.DeleteAccount(1);
+
+        // Assert
+        _unitOfWorkMock.Verify(x => x.AccountRepository.Remove(account), Times.Once);
+        _unitOfWorkMock.Verify(x => x.CommitAsync(), Times.Once);
+        Assert.AreEqual($"Account with id: {account.Id} deleted successfully", result.Message);
+    }
+
+    [TestMethod]
+    [ExpectedException(typeof(AccountNotFoundException))]
+    public async Task UpdateAccount_ShouldThrowAccountNotFoundException()
+    {
+        // Arrange
+        var account = new Account { Id = 1 };
+        _unitOfWorkMock.Setup(x => x.AccountRepository.GetAsync(It.IsAny<System.Linq.Expressions.Expression<System.Func<Account, bool>>>())).ReturnsAsync((Account)null);
+
+        // Act
+        await _accountService.UpdateAccount(account);
+    }
+
+    [TestMethod]
+    [ExpectedException(typeof(AccountNotFoundException))]
+    public async Task Deposit_ShouldThrowAccountNotFoundException()
+    {
+        // Arrange
+        var account = new Account { Id = 1 };
+        _unitOfWorkMock.Setup(x => x.AccountRepository.GetAsync(It.IsAny<System.Linq.Expressions.Expression<System.Func<Account, bool>>>())).ReturnsAsync((Account)null);
+
+        // Act
+        await _accountService.Deposit(1, 100);
+    }
+
+    [TestMethod]
+    [ExpectedException(typeof(AccountNotFoundException))]
+    public async Task DeleteAccount_ShouldThrowAccountNotFoundException()
+    {
+        // Arrange
+        var account = new Account { Id = 1 };
+        _unitOfWorkMock.Setup(x => x.AccountRepository.GetAsync(It.IsAny<System.Linq.Expressions.Expression<System.Func<Account, bool>>>())).ReturnsAsync((Account)null);
+
+        // Act
+        await _accountService.DeleteAccount(1);
     }
 }
