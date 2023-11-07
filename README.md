@@ -31,7 +31,7 @@ Follow these steps to get started with the Roulette Game API:
 
 2. **Clone the repository:**
    ```bash
-   git clone https://github.com/yourusername/roulette-game-api.git
+   git clone https://github.com/godycnyama/DRVCAssessment.git
    ```
 
 3. **Open the project:**
@@ -56,122 +56,29 @@ The Roulette Game API follows RESTful principles and can be used by sending HTTP
 ## Endpoints
 
 The API provides the following endpoints:
-
-- `POST /api/game/start`: Start a new game session.
-- `POST /api/game/bet`: Place a bet on the current game session.
-- `POST /api/game/spin`: Spin the roulette wheel and determine the winning number.
-- `GET /api/game/result`: Retrieve the game results and current balance.
-
-For more details on request and response formats, refer to the [Sample Requests and Responses](#sample-requests-and-responses) section.
-
-## Sample Requests and Responses
-
-Here are some sample requests and responses for the API:
-
-### Starting a New Game
-
-**Request:**
-
-```http
-POST /api/game/start
-```
-
-**Response:**
-
-```json
-{
-  "sessionId": "f27f7861-6ca4-4b6c-b3d9-4d9b6a6b66a8",
-  "balance": 1000.0
-}
-```
-
-### Placing a Bet
-
-**Request:**
-
-```http
-POST /api/game/bet
-```
-
-**Request Body:**
-
-```json
-{
-  "sessionId": "f27f7861-6ca4-4b6c-b3d9-4d9b6a6b66a8",
-  "betAmount": 50.0,
-  "betType": "red",
-  "betNumber": 0
-}
-```
-
-**Response:**
-
-```json
-{
-  "message": "Bet placed successfully."
-}
-```
-
-### Spinning the Wheel
-
-**Request:**
-
-```http
-POST /api/game/spin
-```
-
-**Request Body:**
-
-```json
-{
-  "sessionId": "f27f7861-6ca4-4b6c-b3d9-4d9b6a6b66a8"
-}
-```
-
-**Response:**
-
-```json
-{
-  "winningNumber": 7,
-  "resultMessage": "You win $100.0!"
-}
-```
-
-### Retrieving Game Results
-
-**Request:**
-
-```http
-GET /api/game/result?f27f7861-6ca4-4b6c-b3d9-4d9b6a6b66a8
-```
-
-**Response:**
-
-```json
-{
-  "sessionId": "f27f7861-6ca4-4b6c-b3d9-4d9b6a6b66a8",
-  "balance": 950.0
-}
-```
-
-## Configuration
-
-You can configure the API by modifying the `appsettings.json` file in the project. It allows you to customize various settings such as the initial player balance, available bet types, and more.
-
-## Contributing
-
-If you'd like to contribute to this project, please follow these guidelines:
-
-1. Fork the repository.
-2. Create a feature branch.
-3. Make your changes and commit them with descriptive messages.
-4. Push your changes to your fork.
-5. Create a pull request to the main repository.
-
-Please ensure your code follows the project's coding standards and includes relevant tests.
-
-## License
-
-This project is licensed under the [MIT License](LICENSE). You are free to use, modify, and distribute the code as per the terms of the license.
-
-Happy coding and enjoy your roulette game development with this API! If you have any questions or need further assistance, feel free to reach out to us.
+roulette/api/accounts/{id}"
+- `POST /roulette/api/accounts`: Create a new player account.
+- `PUT /roulette/api/accounts`: Update player account.
+- `GET /roulette/api/accounts`: Get player accounts.
+- `GET /roulette/api/accounts/{id}`: Get player account by id.
+- `GET /roulette/api/accounts/{id}`: Delete player account by id.
+- `POST /roulette/api/sessions`: Create a new session.
+- `PUT /roulette/api/sessions`: Update session.
+- `GET /roulette/api/sessions`: Get sessions.
+- `GET /roulette/api/sessions/{id}`: Get session by id.
+- `GET /roulette/api/sessions/{id}`: Delete session by id.
+- `POST /roulette/api/bets`: Create a new bet.
+- `PUT /roulette/api/bets`: Update bet.
+- `GET /roulette/api/bets`: Get bets.
+- `GET /roulette/api/bets/{id}`: Get bet by id.
+- `GET /roulette/api/bets/{id}`: Delete bet by id.
+- `POST /roulette/api/spins`: Create a new spin.
+- `PUT /roulette/api/spins`: Update spin.
+- `GET /roulette/api/spins`: Get spins.
+- `GET /roulette/api/spins/{id}`: Get spin by id.
+- `GET /roulette/api/spins/{id}`: Delete spin by id.
+- `POST /roulette/api/payouts`: Create a new payout.
+- `PUT /roulette/api/payouts`: Update payout.
+- `GET /roulette/api/payouts`: Get payouts.
+- `GET /roulette/api/payouts/{id}`: Get payout by id.
+- `GET /roulette/api/payouts/{id}`: Delete payout by id.
