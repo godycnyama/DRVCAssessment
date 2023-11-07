@@ -21,8 +21,4 @@
     <ProjectReference Include="..\Roulette.API\Roulette.API.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="ControllersUnitTests\" />
-  </ItemGroup>
-
 </Project>
