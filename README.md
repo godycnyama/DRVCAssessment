@@ -11,7 +11,6 @@ A number of designs patterns were used during the implemantation of the solution
 - [Getting Started](#getting-started)
 - [Usage](#usage)
 - [Endpoints](#endpoints)
-- [License](#license)
 
 ## Features
 
