@@ -13,6 +13,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Roulette.Infrastructure", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Roulette.UnitTests", "Roulette.UnitTests\Roulette.UnitTests.csproj", "{429AC21D-0323-4A70-9629-81D448E8DD38}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SQLServerScripts", "SQLServerScripts", "{E2E44AAE-84B1-407A-AF91-16FE97EEDA40}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\..\..\Users\godyc\Downloads\pr_GetOrderSummaryStoredProcedureByGodknows.sql = ..\..\..\..\Users\godyc\Downloads\pr_GetOrderSummaryStoredProcedureByGodknows.sql
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
