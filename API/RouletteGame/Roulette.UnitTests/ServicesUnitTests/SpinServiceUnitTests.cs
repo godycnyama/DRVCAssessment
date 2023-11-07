@@ -35,7 +35,7 @@ namespace Roulette.Tests.Infrastructure.Services
             var actualSpins = await _spinService.GetAllSpins();
 
             // Assert
-            Assert.AreEqual(expectedSpins.Count, actualSpins.Count);
+            Assert.AreEqual(expectedSpins.Count, actualSpins.ToList().Count);
         }
 
         [TestMethod]
