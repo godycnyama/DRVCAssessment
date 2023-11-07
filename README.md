@@ -1,12 +1,9 @@
-# DRVCAssessment
-
 # Roulette Game API
 
 ## Overview
 
-This project is a Roulette Game API developed in Visual Studio. It provides a simple and efficient way to interact with a virtual roulette game, allowing you to place bets and spin the wheel. Whether you're building a full-fledged casino application or just want to experiment with roulette game logic, this API has you covered.
-
-![Roulette Wheel](https://example.com/roulette-wheel.png)
+This project is a Roulette Game API based on .Net 7. It was designed following the Clean Architecture principles. It consists of 5 projects namely Roulette.API, Roulette.Application, Roulette.Infrastructure, Roulette.Domain and Roulette.UnitTests.
+A number of designs patterns were used during the implemantation of the solution. The CQRS and Mediator patterns were used to implement the API and business logic in the Roulette.API and Roulette.Application projects. The MediatR library was utilised to implement these two patterns. In the infrastructure layer (Roulette.Infrastructure), the unit of work and repository patterns were utilised to interact with the database while utilising Entity Framework Core. SQLite was used as the database, and the database file, roulette.db is located in the Roulette.API project. SOLID principles and clean code principles were used throughout the solution code base. Using MediatR library helped a lot in in writing loosely coupled, easily testable, clean code. MSTest was utilised as the test framework.
 
 ## Table of Contents
 
@@ -14,18 +11,15 @@ This project is a Roulette Game API developed in Visual Studio. It provides a si
 - [Getting Started](#getting-started)
 - [Usage](#usage)
 - [Endpoints](#endpoints)
-- [Sample Requests and Responses](#sample-requests-and-responses)
-- [Configuration](#configuration)
-- [Contributing](#contributing)
 - [License](#license)
 
 ## Features
 
-- Create a new roulette game session.
-- Place various types of bets on the table.
-- Spin the roulette wheel and determine the winning number.
-- Retrieve game results and current balance.
-- Manage game sessions and player accounts.
+- Manage roulette game sessions.
+- Manage bets placement.
+- Manage roulette wheel spins and record the winning numbers.
+- Manage accounts for players.
+- Manage payouts. 
 
 ## Getting Started
 
@@ -33,7 +27,7 @@ Follow these steps to get started with the Roulette Game API:
 
 1. **Prerequisites:**
    - [Visual Studio](https://visualstudio.microsoft.com/) installed on your system.
-   - [.NET Core SDK](https://dotnet.microsoft.com/download/dotnet) for building and running the project.
+   - [.NET Core SDK 7](https://dotnet.microsoft.com/download/dotnet) for building and running the project.
 
 2. **Clone the repository:**
    ```bash
@@ -57,7 +51,7 @@ Follow these steps to get started with the Roulette Game API:
 
 ## Usage
 
-The Roulette Game API follows RESTful principles and can be used by sending HTTP requests to its endpoints. You can interact with the API using your favorite HTTP client or by integrating it into your applications.
+The Roulette Game API follows RESTful principles and can be used by sending HTTP requests to its endpoints. You can interact with the API using your favorite HTTP client 
 
 ## Endpoints
 
