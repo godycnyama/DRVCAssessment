@@ -12,15 +12,16 @@ using Roulette.Application.Features.BetFeatures.Queries.GetBet;
 using Roulette.Application.Features.BetFeatures.Queries.GetBets;
 using Roulette.Application.Exceptions;
 
-namespace Roulette.API.Tests.BetsAPI
+namespace Roulette.UnitTests.ControllersUnitTests
 {
     [TestClass]
     public class BetsControllerUnitTests
     {
-        private readonly Mock<IMediator> _mediatorMock = new Mock<IMediator>();
-        private readonly BetsController _controller;
+        private Mock<IMediator> _mediatorMock = new Mock<IMediator>();
+        private BetsController _controller;
 
-        public BetsControllerUnitTests()
+        [TestInitialize]
+        public void Initialize()
         {
             _controller = new BetsController(_mediatorMock.Object);
         }
