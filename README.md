@@ -40,7 +40,7 @@ Follow these steps to get started with the Roulette Game API:
    - Build the solution to restore dependencies and compile the code.
 
 5. **Run the application:**
-   - Start the application within Visual Studio by first selecting Roulette.API as your startup project or use the command  line (navigate into Roulette.API ) with the following command:
+   - Start the application within Visual Studio by first selecting Roulette.API as your startup project or use the command  line with the following command:
      ```bash
      dotnet run
      ```
