@@ -40,13 +40,15 @@ Follow these steps to get started with the Roulette Game API:
    - Build the solution to restore dependencies and compile the code.
 
 5. **Run database migrations:**
-   - Select Roulette.Infrastructure as your target project for migrations at the same time making sure you have selected Roulette.API as your startup project. Run the following    
-     migration commands one after the other.
+   - Select Roulette.Infrastructure as your default project for migrations in Visual Studio Package Manager Console. At the same time making sure you have selected Roulette.API as your 
+      startup project in Visual Studio.
+     In Visual Studio Package Manager Console run the following command to create your initial migration.   
       ```bash
-     dotnet ef migrations add InitialCreate
+     add-migration rouletteDBMigration1
      ```
+      To apply the migration you have created, run the following command in Visual Studio Package Manager Console.
      ```bash
-     dotnet ef database update
+     update-database
      ```
 
 6. **Run the application:**
