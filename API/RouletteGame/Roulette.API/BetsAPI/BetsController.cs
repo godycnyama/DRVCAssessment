@@ -10,7 +10,7 @@ using Roulette.Application.Features.BetFeatures.Queries.GetBets;
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace Roulette.API.BetsAPI;
-[Route("api/[controller]")]
+
 [ApiController]
 public class BetsController : ControllerBase
 {

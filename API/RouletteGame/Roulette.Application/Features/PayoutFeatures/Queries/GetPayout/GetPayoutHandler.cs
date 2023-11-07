@@ -17,7 +17,7 @@ public sealed class GetPayoutHandler : IRequestHandler<GetPayoutRequest, GetPayo
 
     public async Task<GetPayoutResponse> Handle(GetPayoutRequest request, CancellationToken cancellationToken)
     {
-        Payout payout =  await payoutService.GetPayout(request.Id, cancellationToken);
+        Payout payout =  await payoutService.GetPayout(request.PayoutID);
         return mapper.Map<GetPayoutResponse>(payout);
     }
 }

@@ -5,6 +5,6 @@ public sealed class DeleteAccountValidator : AbstractValidator<DeleteAccountRequ
 {
     public DeleteAccountValidator()
     {
-        RuleFor(x => x.Id).NotEmpty();
+        RuleFor(x => x.AccountID).NotEmpty();
     }
 }

@@ -15,6 +15,6 @@ public sealed class DeleteAccountHandler : IRequestHandler<DeleteAccountRequest,
 
     public async Task<DeleteAccountResponse> Handle(DeleteAccountRequest request, CancellationToken cancellationToken)
     {
-        return await _accountService.DeleteAccount(request.Id);
+        return await _accountService.DeleteAccount(request.AccountID);
     }
 }

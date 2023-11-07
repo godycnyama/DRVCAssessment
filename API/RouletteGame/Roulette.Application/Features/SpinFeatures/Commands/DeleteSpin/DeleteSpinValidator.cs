@@ -5,6 +5,6 @@ public sealed class DeleteSpinValidator : AbstractValidator<DeleteSpinRequest>
 {
     public DeleteSpinValidator()
     {
-        RuleFor(x => x.Id).NotEmpty();
+        RuleFor(x => x.SpinID).NotEmpty();
     }
 }

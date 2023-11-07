@@ -17,7 +17,7 @@ public sealed class GetAccountHandler : IRequestHandler<GetAccountRequest, GetAc
 
     public async Task<GetAccountResponse> Handle(GetAccountRequest request, CancellationToken cancellationToken)
     {
-        Account account =  await accountService.GetAccount(request.Id, cancellationToken);
+        Account account =  await accountService.GetAccount(request.AccountID);
         return mapper.Map<GetAccountResponse>(account);
     }
 }

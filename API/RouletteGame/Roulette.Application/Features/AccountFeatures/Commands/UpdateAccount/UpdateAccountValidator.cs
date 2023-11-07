@@ -5,10 +5,11 @@ public sealed class UpdateAccountValidator : AbstractValidator<UpdateAccountRequ
 {
     public UpdateAccountValidator()
     {
-        RuleFor(x => x.Id).NotEmpty();
-        RuleFor(x => x.FirstName).NotEmpty();
-        RuleFor(x => x.LastName).NotEmpty();
-        RuleFor(x => x.UserName).NotEmpty();
+        RuleFor(x => x.AccountID).NotEmpty();
+        RuleFor(x => x.FirstName).NotEmpty().MaximumLength(50);
+        RuleFor(x => x.LastName).NotEmpty().MaximumLength(50);
+        RuleFor(x => x.UserName).NotEmpty().MaximumLength(50);
         RuleFor(x => x.Balance).NotEmpty();
+        RuleFor(x => x.Currency).NotEmpty().MaximumLength(4);
     }
 }

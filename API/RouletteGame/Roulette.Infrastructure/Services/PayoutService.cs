@@ -1,9 +1,7 @@
 ﻿using Roulette.Application.Abstractions.Services;
 using Roulette.Application.Abstractions.UnitOfWork;
 using Roulette.Application.Exceptions;
-using Roulette.Application.Features.PayoutFeatures.Commands.CreatePayout;
 using Roulette.Application.Features.PayoutFeatures.Commands.DeletePayout;
-using Roulette.Application.Features.PayoutFeatures.Commands.UpdatePayout;
 using Roulette.Domain.Entities;
 
 namespace Roulette.Infrastructure.Services;
@@ -21,30 +19,30 @@ public class PayoutService : IPayoutService
     }
     public async Task<Payout> GetPayout(int id)
     {
-        return await _unitOfWork.PayoutRepository.GetAsync(item => item.Id == id);
+        return await _unitOfWork.PayoutRepository.GetAsync(item => item.PayoutID == id);
 
     }
-    public async Task<CreatePayoutResponse> CreatePayout(Payout payout)
+    public async Task<Payout> CreatePayout(Payout payout)
     {
         _unitOfWork.PayoutRepository.Add(payout);
         await _unitOfWork.CommitAsync();
-        return new CreatePayoutResponse { Message = $"Payout with id: {payout.Id} has been created succesfully" };
+        return payout;
     }
-    public async Task<UpdatePayoutResponse> UpdatePayout(Payout payout)
+    public async Task<Payout> UpdatePayout(Payout payout)
     {
-        Payout _payout = await _unitOfWork.PayoutRepository.GetAsync(item => item.Id == payout.Id);
+        Payout _payout = await _unitOfWork.PayoutRepository.GetAsync(item => item.PayoutID == payout.PayoutID);
         if (_payout == null)
         {
-            throw new PayoutNotFoundException(payout.Id.ToString());
+            throw new PayoutNotFoundException(payout.PayoutID.ToString());
         }
         _unitOfWork.PayoutRepository.Update(_payout);
         await _unitOfWork.CommitAsync();
-        return new UpdatePayoutResponse { Message = $"Payout with id: {payout.Id} updated successfully" };
+        return payout;
     }
 
     public async Task<DeletePayoutResponse> DeletePayout(int id)
     {
-        Payout _payout = await _unitOfWork.PayoutRepository.GetAsync(item => item.Id == id);
+        Payout _payout = await _unitOfWork.PayoutRepository.GetAsync(item => item.PayoutID == id);
         if (_payout == null)
         {
             throw new PayoutNotFoundException(id.ToString());

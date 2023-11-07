@@ -5,6 +5,6 @@ public sealed class GetBetValidator : AbstractValidator<GetBetRequest>
 {
     public GetBetValidator()
     {
-        RuleFor(x => x.Id).NotEmpty();
+        RuleFor(x => x.BetID).NotEmpty();
     }
 }

@@ -17,6 +17,6 @@ public sealed class DeleteBetHandler : IRequestHandler<DeleteBetRequest, DeleteB
 
     public async Task<DeleteBetResponse> Handle(DeleteBetRequest request, CancellationToken cancellationToken)
     {
-        return await betService.DeleteBet(request.Id);
+        return await betService.DeleteBet(request.BetID);
     }
 }

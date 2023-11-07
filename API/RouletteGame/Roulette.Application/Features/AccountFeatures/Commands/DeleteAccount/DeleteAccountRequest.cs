@@ -2,4 +2,4 @@
 
 namespace Roulette.Application.Features.AccountFeatures.Commands.DeleteAccount;
 
-public sealed record DeleteAccountRequest(int Id) : IRequest<DeleteAccountResponse>;
+public sealed record DeleteAccountRequest(int AccountID) : IRequest<DeleteAccountResponse>;

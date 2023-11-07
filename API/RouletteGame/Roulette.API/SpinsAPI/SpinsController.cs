@@ -1,24 +1,20 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Roulette.Application.Abstractions.Services;
 using Roulette.Application.Exceptions;
+using Roulette.Application.Features.SpinFeatures.Commands.CreateSpin;
 using Roulette.Application.Features.SpinFeatures.Commands.DeleteSpin;
+using Roulette.Application.Features.SpinFeatures.Commands.UpdateSpin;
 using Roulette.Application.Features.SpinFeatures.Queries.GetSpin;
 using Roulette.Application.Features.SpinFeatures.Queries.GetSpins;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-
 namespace Roulette.API.SpinsAPI;
-[Route("api/[controller]")]
+
 [ApiController]
 public class SpinsController : ControllerBase
 {
-    private readonly ISpinService _spinsService;
     private readonly IMediator _mediator;
-
-    public SpinsController(ISpinService spinsService, IMediator mediator)
+    public SpinsController(IMediator mediator)
     {
-        _spinsService = spinsService;
         _mediator = mediator;
     }
 
@@ -47,6 +43,24 @@ public class SpinsController : ControllerBase
             throw new SpinsNotFoundException(id.ToString());
         }
         return Ok(spin);
+    }
+
+    //update spin
+    [HttpPut]
+    [Route("roulette/api/v1/spins")]
+    public async Task<IActionResult> UpdateSpin([FromBody] UpdateSpinRequest updateSpinRequest)
+    {
+        var response = await _mediator.Send(updateSpinRequest);
+        return Ok(response);
+    }
+
+    //create new spin
+    [HttpPost]
+    [Route("roulette/api/v1/spins")]
+    public async Task<IActionResult> CreateSpin([FromBody] CreateSpinRequest createSpinRequest)
+    {
+        var response = await _mediator.Send(createSpinRequest);
+        return Ok(response);
     }
 
     //delete spin given spin id

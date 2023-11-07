@@ -21,10 +21,12 @@ public static class ServiceExtensions
         services.AddScoped<IAccountRepository, AccountRepository>();
         services.AddScoped<IPayoutRepository, PayoutRepository>();
         services.AddScoped<ISpinRepository, SpinRepository>();
+        services.AddScoped<ISessionRepository, SessionRepository>();
         services.AddScoped<IBetService, BetService>();
         services.AddScoped<IAccountService, AccountService>();
         services.AddScoped<ISpinService, SpinService>();
         services.AddScoped<IPayoutService, PayoutService>();
+        services.AddScoped<ISessionService, SessionService>();
     }
 
 }

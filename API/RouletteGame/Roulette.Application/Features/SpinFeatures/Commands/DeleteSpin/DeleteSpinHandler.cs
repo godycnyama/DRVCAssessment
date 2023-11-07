@@ -16,6 +16,6 @@ public sealed class DeleteSpinHandler : IRequestHandler<DeleteSpinRequest, Delet
 
     public async Task<DeleteSpinResponse> Handle(DeleteSpinRequest request, CancellationToken cancellationToken)
     {
-        return await spinService.DeleteSpin(request.Id);
+        return await spinService.DeleteSpin(request.SpinID);
     }
 }

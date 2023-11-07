@@ -5,6 +5,6 @@ public sealed class GetPayoutValidator : AbstractValidator<GetPayoutRequest>
 {
     public GetPayoutValidator()
     {
-        RuleFor(x => x.Id).NotEmpty();
+        RuleFor(x => x.PayoutID).NotEmpty();
     }
 }

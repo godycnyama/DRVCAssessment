@@ -2,4 +2,4 @@
 
 namespace Roulette.Application.Features.PayoutFeatures.Commands.DeletePayout;
 
-public sealed record DeletePayoutRequest(int Id) : IRequest<DeletePayoutResponse>;
+public sealed record DeletePayoutRequest(int PayoutID) : IRequest<DeletePayoutResponse>;

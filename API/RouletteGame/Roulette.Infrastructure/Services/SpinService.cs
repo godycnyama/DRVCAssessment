@@ -16,15 +16,32 @@ public class SpinService : ISpinService
     {
         return await _unitOfWork.SpinRepository.GetAllAsync();
     }
-    public async Task<Spin> GetSpin(int id, CancellationToken cancellationToken)
+    public async Task<Spin> CreateSpin(Spin spin)
     {
-        return await _unitOfWork.SpinRepository.GetAsync(item => item.Id == id);
+        _unitOfWork.SpinRepository.Add(spin);
+        await _unitOfWork.CommitAsync();
+        return spin;
+    }
+    public async Task<Spin> UpdateSpin(Spin spin)
+    {
+        Spin _spin = await _unitOfWork.SpinRepository.GetAsync(item => item.SpinID == spin.SpinID);
+        if (_spin == null)
+        {
+            throw new SpinNotFoundException(spin.SpinID.ToString());
+        }
+        _unitOfWork.SpinRepository.Update(_spin);
+        await _unitOfWork.CommitAsync();
+        return spin;
+    }
+    public async Task<Spin> GetSpin(int id)
+    {
+        return await _unitOfWork.SpinRepository.GetAsync(item => item.SpinID == id);
 
     }
 
     public async Task<DeleteSpinResponse> DeleteSpin(int id)
     {
-        Spin _spin = await _unitOfWork.SpinRepository.GetAsync(item => item.Id == id);
+        Spin _spin = await _unitOfWork.SpinRepository.GetAsync(item => item.SpinID == id);
         if (_spin == null)
         {
 

@@ -5,6 +5,6 @@ public sealed class GetSpinValidator : AbstractValidator<GetSpinRequest>
 {
     public GetSpinValidator()
     {
-        RuleFor(x => x.Id).NotEmpty();
+        RuleFor(x => x.SpinID).NotEmpty();
     }
 }

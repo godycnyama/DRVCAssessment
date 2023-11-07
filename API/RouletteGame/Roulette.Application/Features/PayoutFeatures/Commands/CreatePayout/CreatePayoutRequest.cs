@@ -7,4 +7,4 @@ using MediatR;
 
 namespace Roulette.Application.Features.PayoutFeatures.Commands.CreatePayout;
 
-public sealed record CreatePayoutRequest(decimal Amount) : IRequest<CreatePayoutResponse>;
+public sealed record CreatePayoutRequest(decimal Amount,string Currency,int AccountID, int SessionID, int BetID) : IRequest<CreatePayoutResponse>;

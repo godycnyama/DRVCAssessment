@@ -16,7 +16,7 @@ public sealed class DepositAccountHandler : IRequestHandler<DepositAccountReques
 
     public async Task<DepositAccountResponse> Handle(DepositAccountRequest request, CancellationToken cancellationToken)
     {
-        var response = await _accountService.Deposit(request.Id, request.Amount);
+        var response = await _accountService.Deposit(request.AccountID, request.Amount);
         return _mapper.Map<DepositAccountResponse>(response);
     }
 }

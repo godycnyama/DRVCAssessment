@@ -5,8 +5,10 @@ public sealed class UpdateBetValidator : AbstractValidator<UpdateBetRequest>
 {
     public UpdateBetValidator()
     {
-        RuleFor(x => x.Id).NotEmpty();
+        RuleFor(x => x.BetID).NotEmpty();
         RuleFor(x => x.Amount).NotEmpty();
         RuleFor(x => x.Number).NotEmpty();
+        RuleFor(x => x.AccountID).NotEmpty();
+        RuleFor(x => x.SessionID).NotEmpty();
     }
 }

@@ -2,4 +2,4 @@
 
 namespace Roulette.Application.Features.SpinFeatures.Commands.DeleteSpin;
 
-public sealed record DeleteSpinRequest(int Id) : IRequest<DeleteSpinResponse>;
+public sealed record DeleteSpinRequest(int SpinID) : IRequest<DeleteSpinResponse>;

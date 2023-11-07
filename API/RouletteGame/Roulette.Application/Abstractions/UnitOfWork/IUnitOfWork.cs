@@ -1,9 +1,4 @@
 ﻿using Roulette.Application.Abstractions.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Roulette.Application.Abstractions.UnitOfWork;
 public interface IUnitOfWork
@@ -12,6 +7,7 @@ public interface IUnitOfWork
     IAccountRepository AccountRepository { get; }
     ISpinRepository SpinRepository { get; }
     IPayoutRepository PayoutRepository { get; }
+    ISessionRepository SessionRepository { get; }
     void Commit();
     void Rollback();
     Task CommitAsync();

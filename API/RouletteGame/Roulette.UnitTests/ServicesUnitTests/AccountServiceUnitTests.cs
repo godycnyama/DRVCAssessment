@@ -39,17 +39,17 @@ public class AccountServiceUnitTests
     }
 
     [TestMethod]
-    public async Task GetAccount_ShouldReturnAccountWithGivenId()
+    public async Task GetAccount_ShouldReturnAccountWithGivenAccountID()
     {
         // Arrange
-        var account = new Account { Id = 1 };
+        var account = new Account { AccountID = 1 };
         _unitOfWorkMock.Setup(x => x.AccountRepository.GetAsync(It.IsAny<System.Linq.Expressions.Expression<System.Func<Account, bool>>>())).ReturnsAsync(account);
 
         // Act
-        var result = await _accountService.GetAccount(1, CancellationToken.None);
+        var result = await _accountService.GetAccount(1);
 
         // Assert
-        Assert.AreEqual(account.Id, result.Id);
+        Assert.AreEqual(account.AccountID, result.AccountID);
     }
 
     [TestMethod]
@@ -72,7 +72,7 @@ public class AccountServiceUnitTests
     public async Task UpdateAccount_ShouldUpdateAccountInRepository()
     {
         // Arrange
-        var account = new Account { Id = 1 };
+        var account = new Account { AccountID = 1 };
         _unitOfWorkMock.Setup(x => x.AccountRepository.GetAsync(It.IsAny<System.Linq.Expressions.Expression<System.Func<Account, bool>>>())).ReturnsAsync(account);
 
         // Act
@@ -88,7 +88,7 @@ public class AccountServiceUnitTests
     public async Task Deposit_ShouldUpdateAccountBalanceInRepository()
     {
         // Arrange
-        var account = new Account { Id = 1 };
+        var account = new Account { AccountID = 1 };
         _unitOfWorkMock.Setup(x => x.AccountRepository.GetAsync(It.IsAny<System.Linq.Expressions.Expression<System.Func<Account, bool>>>())).ReturnsAsync(account);
 
         // Act
@@ -104,7 +104,7 @@ public class AccountServiceUnitTests
     public async Task DeleteAccount_ShouldRemoveAccountFromRepository()
     {
         // Arrange
-        var account = new Account { Id = 1 };
+        var account = new Account { AccountID = 1 };
         _unitOfWorkMock.Setup(x => x.AccountRepository.GetAsync(It.IsAny<System.Linq.Expressions.Expression<System.Func<Account, bool>>>())).ReturnsAsync(account);
 
         // Act
@@ -113,7 +113,7 @@ public class AccountServiceUnitTests
         // Assert
         _unitOfWorkMock.Verify(x => x.AccountRepository.Remove(account), Times.Once);
         _unitOfWorkMock.Verify(x => x.CommitAsync(), Times.Once);
-        Assert.AreEqual($"Account with id: {account.Id} deleted successfully", result.Message);
+        Assert.AreEqual($"Account with id: {account.AccountID} deleted successfully", result.Message);
     }
 
     [TestMethod]
@@ -121,7 +121,7 @@ public class AccountServiceUnitTests
     public async Task UpdateAccount_ShouldThrowAccountNotFoundException()
     {
         // Arrange
-        var account = new Account { Id = 1 };
+        var account = new Account { AccountID = 1 };
         _unitOfWorkMock.Setup(x => x.AccountRepository.GetAsync(It.IsAny<System.Linq.Expressions.Expression<System.Func<Account, bool>>>())).ReturnsAsync((Account)null);
 
         // Act
@@ -133,7 +133,7 @@ public class AccountServiceUnitTests
     public async Task Deposit_ShouldThrowAccountNotFoundException()
     {
         // Arrange
-        var account = new Account { Id = 1 };
+        var account = new Account { AccountID = 1 };
         _unitOfWorkMock.Setup(x => x.AccountRepository.GetAsync(It.IsAny<System.Linq.Expressions.Expression<System.Func<Account, bool>>>())).ReturnsAsync((Account)null);
 
         // Act
@@ -145,7 +145,7 @@ public class AccountServiceUnitTests
     public async Task DeleteAccount_ShouldThrowAccountNotFoundException()
     {
         // Arrange
-        var account = new Account { Id = 1 };
+        var account = new Account { AccountID = 1 };
         _unitOfWorkMock.Setup(x => x.AccountRepository.GetAsync(It.IsAny<System.Linq.Expressions.Expression<System.Func<Account, bool>>>())).ReturnsAsync((Account)null);
 
         // Act

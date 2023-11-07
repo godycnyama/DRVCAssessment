@@ -12,4 +12,5 @@ public  class RouletteDataContext: DbContext
     public DbSet<Spin> Spins { get; set; }
     public DbSet<Account> Deposits { get; set; }
     public DbSet<Payout> Payouts { get; set; }
+    public DbSet<Session> Sessions { get; set; }
 }

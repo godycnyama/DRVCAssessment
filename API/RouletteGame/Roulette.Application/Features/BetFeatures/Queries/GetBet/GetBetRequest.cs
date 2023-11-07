@@ -2,4 +2,4 @@
 
 namespace Roulette.Application.Features.BetFeatures.Queries.GetBet;
 
-public sealed record GetBetRequest(int Id) : IRequest<GetBetResponse>;
+public sealed record GetBetRequest(int BetID) : IRequest<GetBetResponse>;

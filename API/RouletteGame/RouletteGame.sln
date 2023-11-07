@@ -11,9 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Roulette.Domain", "Roulette
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Roulette.Infrastructure", "Roulette.Infrastructure\Roulette.Infrastructure.csproj", "{F405F8CE-1145-4213-8CF0-BE8EBD8285CF}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Roulette.Shared", "Roulette.Shared\Roulette.Shared.csproj", "{3F86EF62-A1D4-4767-B209-18B3DE1AD8CC}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Roulette.UnitTests", "Roulette.UnitTests\Roulette.UnitTests.csproj", "{429AC21D-0323-4A70-9629-81D448E8DD38}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Roulette.UnitTests", "Roulette.UnitTests\Roulette.UnitTests.csproj", "{429AC21D-0323-4A70-9629-81D448E8DD38}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -37,10 +35,6 @@ Global
 		{F405F8CE-1145-4213-8CF0-BE8EBD8285CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F405F8CE-1145-4213-8CF0-BE8EBD8285CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F405F8CE-1145-4213-8CF0-BE8EBD8285CF}.Release|Any CPU.Build.0 = Release|Any CPU
-		{3F86EF62-A1D4-4767-B209-18B3DE1AD8CC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3F86EF62-A1D4-4767-B209-18B3DE1AD8CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3F86EF62-A1D4-4767-B209-18B3DE1AD8CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3F86EF62-A1D4-4767-B209-18B3DE1AD8CC}.Release|Any CPU.Build.0 = Release|Any CPU
 		{429AC21D-0323-4A70-9629-81D448E8DD38}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{429AC21D-0323-4A70-9629-81D448E8DD38}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{429AC21D-0323-4A70-9629-81D448E8DD38}.Release|Any CPU.ActiveCfg = Release|Any CPU

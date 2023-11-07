@@ -5,7 +5,7 @@ public sealed class DepositAccountValidator : AbstractValidator<DepositAccountRe
 {
     public DepositAccountValidator()
     {
-        RuleFor(x => x.Id).NotEmpty();
+        RuleFor(x => x.AccountID).NotEmpty();
         RuleFor(x => x.Amount).NotEmpty();
     }
 }

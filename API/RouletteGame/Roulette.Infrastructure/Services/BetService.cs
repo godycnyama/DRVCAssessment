@@ -1,9 +1,7 @@
 ﻿using Roulette.Application.Abstractions.Services;
 using Roulette.Application.Abstractions.UnitOfWork;
 using Roulette.Application.Exceptions;
-using Roulette.Application.Features.BetFeatures.Commands.CreateBet;
 using Roulette.Application.Features.BetFeatures.Commands.DeleteBet;
-using Roulette.Application.Features.BetFeatures.Commands.UpdateBet;
 using Roulette.Domain.Entities;
 
 namespace Roulette.Infrastructure.Services;
@@ -20,32 +18,33 @@ public class BetService : IBetService
         return await _unitOfWork.BetRepository.GetAllAsync();
 
     }
-    public async Task<Bet> GetBet(int id, CancellationToken cancellationToken)
+    public async Task<Bet> GetBet(int id)
     {
-        return await _unitOfWork.BetRepository.GetAsync(item => item.Id == id);
+        return await _unitOfWork.BetRepository.GetAsync(item => item.BetID == id);
 
     }
-    public async Task<CreateBetResponse> CreateBet(Bet bet)
+    public async Task<Bet> CreateBet(Bet bet)
     {
         _unitOfWork.BetRepository.Add(bet);
         await _unitOfWork.CommitAsync();
-        return new CreateBetResponse { Message = $"Bet with id: {bet.Id} has been created succesfully" };
+
+        return bet;
     }
-    public async Task<UpdateBetResponse> UpdateBet(Bet bet)
+    public async Task<Bet> UpdateBet(Bet bet)
     {
-        Bet _bet = await _unitOfWork.BetRepository.GetAsync(item => item.Id == bet.Id);
+        Bet _bet = await _unitOfWork.BetRepository.GetAsync(item => item.BetID == bet.BetID);
         if (_bet == null)
         {
-            throw new BetNotFoundException(bet.Id.ToString());
+            throw new BetNotFoundException(bet.BetID.ToString());
         }
         _unitOfWork.BetRepository.Update(_bet);
         await _unitOfWork.CommitAsync();
-        return new UpdateBetResponse { Message = $"Bet with id: {bet.Id} updated successfully" };
+        return bet;
     }
 
     public async Task<DeleteBetResponse> DeleteBet(int id)
     {
-            Bet _bet = await _unitOfWork.BetRepository.GetAsync(item => item.Id == id);
+            Bet _bet = await _unitOfWork.BetRepository.GetAsync(item => item.BetID == id);
             if (_bet == null)
         {
             throw new BetNotFoundException(id.ToString());

@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using MediatR;
 using Roulette.Application.Abstractions.Services;
+using Roulette.Application.Features.AccountFeatures.Commands.CreateAccount;
 using Roulette.Domain.Entities;
 
 namespace Roulette.Application.Features.BetFeatures.Commands.CreateBet;
@@ -18,6 +19,7 @@ public sealed class CreateBetHandler : IRequestHandler<CreateBetRequest, CreateB
     public async Task<CreateBetResponse> Handle(CreateBetRequest request, CancellationToken cancellationToken)
     {
         Bet bet = mapper.Map<Bet>(request);
-        return await betService.CreateBet(bet);
+        var response = await betService.CreateBet(bet);
+        return mapper.Map<CreateBetResponse>(response);
     }
 }

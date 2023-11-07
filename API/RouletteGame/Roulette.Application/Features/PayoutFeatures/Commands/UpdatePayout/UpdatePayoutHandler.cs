@@ -18,6 +18,7 @@ public sealed class UpdatePayoutHandler : IRequestHandler<UpdatePayoutRequest, U
     public async Task<UpdatePayoutResponse> Handle(UpdatePayoutRequest request, CancellationToken cancellationToken)
     {
         Payout payout = mapper.Map<Payout>(request);
-        return await payoutService.UpdatePayout(payout);
+        var response = await payoutService.UpdatePayout(payout);
+        return mapper.Map<UpdatePayoutResponse>(response);
     }
 }

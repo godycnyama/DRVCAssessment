@@ -17,7 +17,7 @@ public sealed class GetBetHandler : IRequestHandler<GetBetRequest, GetBetRespons
 
     public async Task<GetBetResponse> Handle(GetBetRequest request, CancellationToken cancellationToken)
     {
-        Bet bet =  await betService.GetBet(request.Id, cancellationToken);
+        Bet bet =  await betService.GetBet(request.BetID);
         return mapper.Map<GetBetResponse>(bet);
     }
 }

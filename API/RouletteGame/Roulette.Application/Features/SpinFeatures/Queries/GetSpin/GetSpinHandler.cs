@@ -17,7 +17,7 @@ public sealed class GetSpinHandler : IRequestHandler<GetSpinRequest, GetSpinResp
 
     public async Task<GetSpinResponse> Handle(GetSpinRequest request, CancellationToken cancellationToken)
     {
-        Spin spin =  await spinService.GetSpin(request.Id, cancellationToken);
+        Spin spin =  await spinService.GetSpin(request.SpinID);
         return mapper.Map<GetSpinResponse>(spin);
     }
 }

@@ -2,4 +2,4 @@
 
 namespace Roulette.Application.Features.PayoutFeatures.Commands.UpdatePayout;
 
-public sealed record UpdatePayoutRequest(int Id, decimal Amount) : IRequest<UpdatePayoutResponse>;
+public sealed record UpdatePayoutRequest(int PayoutID, decimal Amount, string Currency, int AccountID, int SessionID, int BetID) : IRequest<UpdatePayoutResponse>;

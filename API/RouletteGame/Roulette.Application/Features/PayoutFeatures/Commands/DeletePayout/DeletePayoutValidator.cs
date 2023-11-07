@@ -5,6 +5,6 @@ public sealed class DeletePayoutValidator : AbstractValidator<DeletePayoutReques
 {
     public DeletePayoutValidator()
     {
-        RuleFor(x => x.Id).NotEmpty();
+        RuleFor(x => x.PayoutID).NotEmpty();
     }
 }

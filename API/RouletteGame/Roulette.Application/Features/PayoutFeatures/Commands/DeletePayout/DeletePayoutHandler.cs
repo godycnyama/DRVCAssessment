@@ -16,6 +16,6 @@ public sealed class DeletePayoutHandler : IRequestHandler<DeletePayoutRequest, D
 
     public async Task<DeletePayoutResponse> Handle(DeletePayoutRequest request, CancellationToken cancellationToken)
     {
-        return await payoutService.DeletePayout(request.Id);
+        return await payoutService.DeletePayout(request.PayoutID);
     }
 }

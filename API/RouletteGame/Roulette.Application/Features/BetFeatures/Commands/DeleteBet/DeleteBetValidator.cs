@@ -5,6 +5,6 @@ public sealed class DeleteBetValidator : AbstractValidator<DeleteBetRequest>
 {
     public DeleteBetValidator()
     {
-        RuleFor(x => x.Id).NotEmpty();
+        RuleFor(x => x.BetID).NotEmpty();
     }
 }
