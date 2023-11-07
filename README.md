@@ -41,19 +41,25 @@ Follow these steps to get started with the Roulette Game API:
    - Build the solution to restore dependencies and compile the code.
 
 5. **Run the application:**
-   - Start the application within Visual Studio or use the command line with the following command:
+   - Start the application within Visual Studio by first selecting Roulette.API as your startup project or use the command  line (navigate into Roulette.API ) with the following command:
      ```bash
      dotnet run
      ```
 
 6. **Access the API:**
-   - The API will be available at `http://localhost:5000` (or a different URL, depending on your configuration).
+   - The API will be available at `https://localhost:7010` or `http://localhost:5105`.
+
+6. **Access the API Swagger Documentation:**
+   - The API Swagger documentation will be available at `https://localhost:7010/swagger/index.html`.
 
 7. **Run unit tests:**
    - Run the unit tests within Visual Studio or use the command line with the following command:
      ```bash
      dotnet test
      ```
+7. **Run database migrations:**
+   - If you update the data models , you have to run database migrations. You have to select Roulette.Infrastructure as your target projects. The projects is ready to run without       
+     migrations.
 
 ## Usage
 
